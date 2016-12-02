@@ -1,0 +1,5 @@
+function phi_up = img_time_evolve(phi, potential, Deltat, Stop_crit, X, Beta)
+mat_pot = potential(X);
+mat_nonlin_pot = Beta*phi.*conj(phi);
+
+diag_pot = -Deltat*(mat_pot+
