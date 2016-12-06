@@ -1,7 +1,7 @@
 Computation = 'Ground';
 Ncomponents = 1;
 Type = 'BESP';
-Deltat = 1e-3;
+Deltat = 1e-4;
 Stop_time = [];
 Stop_crit = {'MaxNorm',1e-8};
 Method = Method_Var1d(Computation,Ncomponents, Type, Deltat, Stop_time ,Stop_crit);

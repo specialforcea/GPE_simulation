@@ -35,7 +35,7 @@ end
 %% Computing the wave functions after a single time step using Krylov iterative method for RSP
 %If the computation is dynamic
 if (strcmp(Method.Computation,'Dynamic'))
-    Method.Deltat = -1*Method.Deltat;
+    Method.Deltat = -1i*Method.Deltat;
 end
 
 Phi = operator_Splitting1d(Phi, Method, FFTGeometry1D, FFTPhysics1D, FFTOperators1D);

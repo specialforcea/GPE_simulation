@@ -1,6 +1,6 @@
-function y = fourier_transform(phi)
+function y = fourier_transform(phi,Nx)
  
-lin_1 = linspace(0,2^10,2^10+1);
+lin_1 = linspace(0,Nx-1,Nx);
 parity = (-1).^lin_1;
 phi_1 =parity.*phi;
 y = fft(phi_1);

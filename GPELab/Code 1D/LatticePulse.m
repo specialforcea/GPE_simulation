@@ -1,8 +1,8 @@
 Computation = 'Dynamic';
 Ncomponents = 1;
 Type = 'Splitting';
-Deltat = 1e-5;
-t_ramp = 0.2;
+Deltat = 1e-6;
+t_ramp = 0.05;
 Stop_time = t_ramp;
 Method = Method_Var1d(Computation,Ncomponents, Type, Deltat, Stop_time);
 Method.Splitting = 'Lie';
@@ -17,11 +17,11 @@ Beta = 3000;
 
 
 
-v = 200;
+v = 850;
 kappa = v/t_ramp;
-k = 10;
+k = 10.3;
 
-Physics1D = TimePotential_Var1d(Method,Physics1D,@(t,x)(v*sin(k*x).^2));
+Physics1D = TimePotential_Var1d(Method,Physics1D,@(t,x)(v.*sin(k.*x).^2));
 
 Physics1D = Potential_Var1d(Method, Physics1D,@(x)(1/2)*(x.^2));
 
