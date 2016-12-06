@@ -18,6 +18,7 @@ potential = @(x)(1/2*x.^2);
 
 
 X = linspace(xmin,xmax,Nx);
+f = [1:1:2^11+1];
 N_tf = int16(TF_radius/DeltaX);
 cutX = X < TF_radius;
 phi_0 = Thomas_fermi1D(Beta,potential(X)).*cutX;

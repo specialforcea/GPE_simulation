@@ -8,7 +8,7 @@ exp_pot = exp(diag_pot);
 
 phi_up = exp_pot.*phi;
 phi_up = phi_up/norm1d(phi_up, Nx, DeltaX);
-lin_n =  linspace(0,Nx,Nx) - (Nx-1)/2;
+lin_n =  (0:1:Nx-1) - (Nx-1)/2;
 
 dispersion = -(2*pi/(Nx-1)*lin_n).^2 *Deltat/2;
 evol = exp(dispersion);

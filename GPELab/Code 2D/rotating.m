@@ -1,0 +1,33 @@
+Computation = 'Ground';
+Ncomponents = 1;
+Type = 'BESP';
+Deltat = 1;
+Stop_time = [];
+Stop_crit = {'MaxNorm',1e-6};
+Max_iter= 60;
+Method = Method_Var2d(Computation,Ncomponents, Type, Deltat, Stop_time , Stop_crit,Max_iter);
+xmin = -10;
+xmax = 10;
+ymin = -10;
+ymax = 10;
+Nx = 2^8+1;
+Ny = 2^8+1;
+
+Geometry2D = Geometry2D_Var2d(xmin,xmax, ymin,ymax, Nx, Ny);
+Delta = 0.5;
+Beta = 1000;
+Omega = 0.52;
+Physics2D = Physics2D_Var2d(Method,Delta,Beta,Omega);
+Physics2D = Potential_Var2d(Method, Physics2D, @(x,y) (1/2)*(x.^2+y.^2)); 
+Physics2D = Nonlinearity_Var2d(Method, Physics2D, @(phi,x,y) abs(phi).^2 ); 
+Physics2D = Gradientx_Var2d(Method, Physics2D, @(x,y) -1i*Omega*y );
+Physics2D = Gradienty_Var2d(Method, Physics2D, @(x,y) 1i*Omega*x );
+InitialData_choice = 2 ;
+Phi_0 = InitialData_Var2d(Method, Geometry2D, Physics2D,InitialData_choice);
+
+Outputs = OutputsINI_Var2d(Method);
+Printing = 1;
+Evo = 1;
+Draw = 1;
+Print = Print_Var2d(Printing,Evo,Draw);
+[Phi_1,Outputs]= GPELab2d(Phi_0,Method,Geometry2D,Physics2D,Outputs,[],Print);

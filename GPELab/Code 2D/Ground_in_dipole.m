@@ -1,0 +1,30 @@
+Computation = 'Ground';
+Ncomponents = 1;
+Type = 'BESP';
+Deltat = 1e-2;
+Stop_time = [];
+Stop_crit = {'MaxNorm',1e-7};
+Method = Method_Var2d(Computation,Ncomponents, Type, Deltat, Stop_time ,Stop_crit);
+xmin = -2;
+xmax = 2;
+ymin = -2;
+ymax = 2;
+Nx = 2^10+1;
+Ny = 2^10+1;
+Geometry2D = Geometry2D_Var2d(xmin,xmax, ymin,ymax, Nx, Ny); 
+Delta = 0.5;
+Beta = 3000; 
+
+Optical_Potential = @(x,y) (1/2)*(x.^2 + y.^2+0*sin(10*x) .^2);
+
+Physics2D = Physics2D_Var2d(Method,Delta,Beta);
+Physics2D = Potential_Var2d(Method, Physics2D,Optical_Potential);
+Physics2D = Nonlinearity_Var2d(Method, Physics2D,@(phi,x,y) abs(phi).^2);
+InitialData_choice = 2 ;
+Phi_0 = InitialData_Var2d(Method, Geometry2D, Physics2D,InitialData_choice);
+Outputs = OutputsINI_Var2d(Method);
+Printing = 1;
+Evo = 15;
+Draw = 1;
+Print = Print_Var2d(Printing,Evo,Draw);
+[Phi_1,Outputs]= GPELab2d(Phi_0,Method,Geometry2D,Physics2D,Outputs,[],Print);
