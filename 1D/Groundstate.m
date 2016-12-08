@@ -1,24 +1,11 @@
 Deltat = 1e-4;
-Stop_crit = 1e-8;
-
-Beta = 3000; 
-TF_radius = (3*Beta/2)^(1/3);
-xmin = -TF_radius;
-xmax = TF_radius;
-
-Nx = 2^11+1;
+Stop_crit = 1e-6;
 
 
-Delta = 0.5;
+
+potential = @(x)(0/2*x.^2);
 
 
-DeltaX = (xmax-xmin)/(Nx-1);
-
-potential = @(x)(1/2*x.^2);
-
-
-X = linspace(xmin,xmax,Nx);
-f = (0:1:Nx-1)-(Nx-1)/2;
 N_tf = int16(TF_radius/DeltaX);
 cutX = X < TF_radius;
 phi_0 = Thomas_fermi1D(Beta,potential(X)).*cutX;

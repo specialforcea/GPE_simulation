@@ -1,0 +1,36 @@
+solve_ODEs;
+stoptime = t_ode.*Dip_freq;
+length_t = size(t_ode,1);
+
+fp = zeros(length_t,2*order +1);
+fp_index = zeros(length_t,2*order +1);
+
+phi_evo = phi_1;
+
+fphi = fourier_transform(phi_evo,Nx);
+
+[fp(1,:),fp_index(1,:)] = find_peak(fphi,order,k_spacing,Nx);
+
+Deltat = 1e-7;
+
+for i = 2:length_t
+    
+phi_evo = dynamic(phi_evo,stoptime(i)-stoptime(i-1),Deltat,Beta,Nx,E_r,quanta,k_scale);
+
+fphi = fourier_transform(phi_evo,Nx);
+fphi = fphi
+
+[fp(i,:),fp_index(i,:)] = find_peak(fphi,order,k_spacing,Nx);
+end
+
+pop = cv.*conj(cv);
+f_square = fp.*conj(fp);
+s = sum(f_square, 1);
+s_root = s_root(s);
+fp = fp./s_root;
+f_square = fp.*conj(fp);
+
+
+
+plot(stoptime,pop(:,2*order+1),stoptime,f_square(:,2*order+1))
+
