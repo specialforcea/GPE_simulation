@@ -1,9 +1,9 @@
-Deltat = 1e-4;
-Stop_crit = 1e-6;
+Deltat = 1e-8;
+Stop_crit = 1e-10;
 
 
 
-potential = @(x)(0/2*x.^2);
+potential = @(x)(1/2*x.^2);
 
 
 N_tf = int16(TF_radius/DeltaX);

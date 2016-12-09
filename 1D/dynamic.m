@@ -15,7 +15,7 @@ V = lattice_pot/quanta;
 DeltaX = (xmax-xmin)/(Nx-1);
 
 
-potential = @(x)(0/2*x.^2 + 200.*sin(k_scale.*x).^2 );
+potential = @(x)(1/2*x.^2 + V.*sin(k_scale.*x).^2 );
 %order = 2;
 
 X = linspace(xmin,xmax,Nx);
