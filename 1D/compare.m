@@ -15,7 +15,7 @@ Deltat = 1e-7;
 
 for i = 2:length_t
     
-phi_evo = dynamic(phi_evo,stoptime(i)-stoptime(i-1),Deltat,Beta,Nx,E_r,quanta,k_scale);
+phi_evo = dynamic(phi_evo,stoptime(i)-stoptime(i-1),Deltat,Beta,Nx,E_r,quanta,k_scale,f);
 
 fphi = fourier_transform(phi_evo,Nx);
 f_square = (fphi.*conj(fphi))./sum(fphi.*conj(fphi));
