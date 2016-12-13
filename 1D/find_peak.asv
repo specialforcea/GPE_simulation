@@ -1,8 +1,0 @@
-function fp = find_peak(phi,X,order,k_spacing)
-fp = zeros(1,2*order +1);
-freq = (-order:1:order).*k_spacing;
-freq_low = freq - k_spacing/10;
-freq_high = freq + k_spacing/10;
-
-
-

@@ -1,5 +1,5 @@
-Deltat = 1e-8;
-Stop_crit = 1e-10;
+Deltat = 1e-12;
+Stop_crit = 1e-11;
 
 
 
@@ -8,7 +8,7 @@ potential = @(x)(1/2*x.^2);
 
 N_tf = int16(TF_radius/DeltaX);
 cutX = X < TF_radius;
-phi_0 = Thomas_fermi1D(Beta,potential(X)).*cutX;
+phi_0 = Thomas_fermi1D(Beta,X,TF_radius,potential(X));
 
 phi = phi_0;
 difference = 1;
