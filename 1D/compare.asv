@@ -8,28 +8,24 @@ fp_index = zeros(length_t,2*order +1);
 phi_evo = phi_1;
 
 fphi = fourier_transform(phi_evo,Nx);
-fsq = fphi.*conj(fphi)/sum(fphi.*conj(fphi));
-[fp(1,:),fp_index(1,:)] = find_peak(fsq,order,k_spacing,Nx);
+[fp(1,:),fp_index(1,:)] = find_peak(fphi.*conj(fphi),order,k_spacing,Nx);
 
 
 
-Deltat = 1e-7;   
+
 
 for i = 2:length_t
- 
+Deltat = (stoptime(i)-stoptime(i-1))/100;    
 phi_evo = dynamic(phi_evo,stoptime(i)-stoptime(i-1),Deltat,Beta,Nx,V,k_scale,f);
 
 fphi = fourier_transform(phi_evo,Nx);
-fsq = fphi.*conj(fphi)/sum(fphi.*conj(fphi));
 
-[fp(i,:),fp_index(i,:)] = find_peak(fsq,order,k_spacing,Nx);
+
+[fp(i,:),fp_index(i,:)] = find_peak(fphi.*conj(fphi),order,k_spacing,Nx);
 end
 s = sum(fp,2);
-div = zeros(size(fp));
-for i = 1:2*order+1
-    div(:,i) = s;
-end
-fp = fp./div;
+
+fp = fp/
 pop = cv.*conj(cv);
 
 

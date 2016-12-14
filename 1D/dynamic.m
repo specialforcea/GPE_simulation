@@ -1,17 +1,16 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,Beta,Nx,E_r,quanta,k_scale,f)
+function phi_2 = dynamic(phi,t_evo,Deltat,Beta,Nx,V,k_scale,f)
 
  
 Stop_time = t_evo;
 
 
 TF_radius = (3*Beta/2)^(1/3);
-xmin = -TF_radius;
-xmax = TF_radius;
+xmin = -TF_radius*6/5;
+xmax = TF_radius*6/5;
 
 
 
-lattice_pot = 4*E_r;
-V = lattice_pot/quanta;
+
 DeltaX = (xmax-xmin)/(Nx-1);
 
 
@@ -29,12 +28,13 @@ fftX = X(1:fftNx);
 Deltat = 1i*Deltat;
 evo = 500;
 n = 0;
+draw = 0;
 while (t < Stop_time)
     fftphi = time_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,DeltaX);
     t = t - 1i*Deltat;
     n = n + 1;
     
-    if (mod(n,evo)==0)
+    if (mod(n,evo)==0 && draw == 1)
         fphi = fourier_transform(fftphi,fftNx);
         b = fphi.*conj(fphi);
         plot(f(1:fftNx),b);
