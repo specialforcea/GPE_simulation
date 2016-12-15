@@ -14,7 +14,7 @@ xmax = TF_radius*6/5;
 DeltaX = (xmax-xmin)/(Nx-1);
 
 
-potential = @(x)(1/2*x.^2 + V.*sin(k_scale.*x).^2 );
+potential = @(x)(0/2*x.^2 + V.*sin(k_scale.*x).^2 );
 %order = 2;
 
 X = linspace(xmin,xmax,Nx);
@@ -28,7 +28,7 @@ fftX = X(1:fftNx);
 Deltat = 1i*Deltat;
 evo = 500;
 n = 0;
-draw = 0;
+draw = 1;
 while (t < Stop_time)
     fftphi = time_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,DeltaX);
     t = t - 1i*Deltat;

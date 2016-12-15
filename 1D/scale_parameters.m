@@ -18,5 +18,5 @@ DeltaX = (xmax-xmin)/(Nx-1);
 X = linspace(xmin,xmax,Nx);% x space
 f = (0:1:Nx-1)-(Nx-1)/2;% momentum space
 k_spacing = k_scale*(xmax-xmin)/pi;%2*k_scale in f space. 
-lattice_pot = 4*E_r;
+lattice_pot = 1*E_r;
 V = lattice_pot/quanta;
