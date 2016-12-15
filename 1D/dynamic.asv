@@ -1,4 +1,4 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,Beta,Nx,V,k_scale,f,deltax,deltaf,L)
+function phi_2 = dynamic(phi,t_evo,Deltat,Beta,Nx,V,k_scale,f)
 
  
 Stop_time = t_evo;
@@ -11,7 +11,7 @@ xmax = TF_radius*6/5;
 
 
 
-
+DeltaX = (xmax-xmin)/(Nx-1);
 
 
 potential = @(x)(0/2*x.^2 + V.*sin(k_scale.*x).^2 );
@@ -31,15 +31,16 @@ evo = 500;
 n = 0;
 draw = 1;
 while (t < Stop_time)
-    fftphi = time_evolve(fftphi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L);
+    fftphi = time_evolve(fftphi, potential,Deltat,X,Beta,Nx,DeltaX);
     t = t - 1i*Deltat;
     n = n + 1;
     
+
     if (mod(n,evo)==0 && draw == 1)
-        fphi = fourier_transform(fftphi,Nx,deltax);
-        %fphi = fphi./norm1d(fphi,Nx,DeltaX);
+        fphi = fourier_transform(fftphi,Nx);
+        fphi = fphi./norm1d(fphi,Nx,DeltaX);
         b = fphi.*conj(fphi);
-        chem = chem_pot(fftphi,X,Nx,Beta,k_scale,deltax,deltaf,V,L);
+        chem = chem_pot(fftphi,X,Nx,Beta,k_scale,DeltaX,V);
         plot(f,b);
         title(num2str(chem));
         drawnow;
