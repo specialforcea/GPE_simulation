@@ -13,14 +13,14 @@ difference = 1;
 evo = 200;
 n = 0;
 while (difference)
-    phi_up = time_evolve(phi, potential,Deltat,X,Beta,Nx,deltax);
+    phi_up = time_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
     if (max(abs(phi_up-phi)) < Stop_crit)
         difference = 0;
     end
     
     if (mod(n,evo) == 0)
         max(abs(phi_up-phi))
-        chem_pot(phi,X,Nx,Beta,k_scale,deltax)
+        chem_pot(phi,X,Nx,Beta,k_scale,deltax,deltaf,V,L)
     end
     phi = phi_up;
     n = n + 1;

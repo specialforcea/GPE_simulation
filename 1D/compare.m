@@ -5,11 +5,11 @@ length_t = size(t_ode,1);
 fp = zeros(length_t,2*order +1);
 fp_index = zeros(length_t,2*order +1);
 
-phi_evo = phi_1;
+phi_evo = phi_0;
 
-fphi = fourier_transform(phi_evo,Nx);
-fsq = fphi.*conj(fphi)/sum(fphi.*conj(fphi));
-[fp(1,:),fp_index(1,:)] = find_peak(fsq,order,k_spacing,Nx);
+fphi = fourier_transform(phi_evo,Nx,deltax);
+
+[fp(1,:),fp_index(1,:)] = find_peak(sq(fphi),order,k_spacing,Nx);
 
 
 
@@ -17,12 +17,12 @@ Deltat = 1e-7;
 
 for i = 2:length_t
  
-phi_evo = dynamic(phi_evo,stoptime(i)-stoptime(i-1),Deltat,Beta,Nx,V,k_scale,f);
+phi_evo = dynamic(phi_evo,stoptime(i)-stoptime(i-1),Deltat,Beta,Nx,V,k_scale,f,deltax,deltaf,L);
 
-fphi = fourier_transform(phi_evo,Nx);
-fsq = fphi.*conj(fphi)/sum(fphi.*conj(fphi));
+fphi = fourier_transform(phi_evo,Nx,deltax);
 
-[fp(i,:),fp_index(i,:)] = find_peak(fsq,order,k_spacing,Nx);
+
+[fp(i,:),fp_index(i,:)] = find_peak(sq(fphi),order,k_spacing,Nx);
 end
 s = sum(fp,2);
 div = zeros(size(fp));
