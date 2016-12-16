@@ -44,7 +44,7 @@ while (t < Stop_time)
         kin = ave_kin(fftphi,Nx,deltax,deltaf,L);
         pot = ave_pot(fftphi,Nx,deltax,X,V,k_scale);
         plot(f,b);
-        title(strcat(num2str(chem),'||',num2str(kin),'||',num2str(pot)));
+        title(strcat(num2str(chem),'/n',num2str(kin),'/n',num2str(pot)));
         drawnow;
         
     end
@@ -53,5 +53,5 @@ end
 % phi_2 = zeros(1,Nx);
 % phi_2(1:fftNx) = fftphi;
 % phi_2(Nx) = phi_2(1);
-phi_2 = fftphi;
+phi_
 end
