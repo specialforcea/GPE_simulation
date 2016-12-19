@@ -14,7 +14,7 @@ xmax = TF_radius;
 
 
 
-potential = @(x)(0/2*x.^2 + V.*sin(k_scale.*x).^2 );
+potential = @(x)(1/2*x.^2 + V.*sin(k_scale.*x).^2 );
 %order = 2;
 
 X = linspace(xmin,xmax,Nx);
@@ -31,8 +31,9 @@ fftX = X(1:fftNx);
 Deltat = 1i*Deltat;
 evo = 500;
 n = 0;
-draw = 1;
+draw = 0;
 while (t < Stop_time)
+    %fftphi = strang_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
     fftphi = time_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
     t = t - 1i*Deltat;
     n = n + 1;
@@ -43,7 +44,7 @@ while (t < Stop_time)
         b = fphi.*conj(fphi);
         chem = chem_pot(fftphi,fftX,fftNx,Beta,k_scale,deltax,deltaf,V,fftL);
         kin = ave_kin(fftphi,fftNx,deltax,deltaf,fftL);
-        pot = ave_pot(fftphi,fftNx,deltax,fftX,V,k_scale);
+        pot = ave_pot(fftphi,fftNx,deltax,fftX,V,k_scale,Beta);
         plot(fftf,b);
         title(strcat(num2str(chem),'||',num2str(kin),'||',num2str(pot)));
         drawnow;
@@ -54,5 +55,5 @@ end
 phi_2 = zeros(1,Nx);
 phi_2(1:fftNx) = fftphi;
 phi_2(Nx) = phi_2(1);
-phi_2 = fftphi;
+%phi_2 = fftphi;
 end

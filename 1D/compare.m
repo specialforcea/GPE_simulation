@@ -5,7 +5,7 @@ length_t = size(t_ode,1);
 fp = zeros(length_t,2*order +1);
 fp_index = zeros(length_t,2*order +1);
 
-phi_evo = phi_0;
+phi_evo = phi_1;
 
 fphi = fourier_transform(phi_evo,Nx,deltax);
 
@@ -13,7 +13,7 @@ fphi = fourier_transform(phi_evo,Nx,deltax);
 
 
 
-Deltat = 1e-7;   
+Deltat = 1e-9;   
 
 for i = 2:length_t
  

@@ -1,6 +1,6 @@
 function phi_up = time_evolve(phi, potential, Deltat, X, Beta, Nx, deltax,deltaf,L)
 mat_pot = potential(X);
-mat_nonlin_pot = 0;%Beta*phi.*conj(phi);
+mat_nonlin_pot = Beta*phi.*conj(phi);
 
 diag_pot = -Deltat*(mat_pot + mat_nonlin_pot);
 

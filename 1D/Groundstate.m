@@ -1,5 +1,5 @@
-Deltat = 1e-7;
-Stop_crit = 1e-10;
+Deltat = 1e-9;
+Stop_crit = 1e-9;
 
 
 
@@ -13,6 +13,7 @@ difference = 1;
 evo = 200;
 n = 0;
 while (difference)
+    %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
     phi_up = time_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
     if (max(abs(phi_up-phi)) < Stop_crit)
         difference = 0;
@@ -28,7 +29,6 @@ while (difference)
 end
 
 phi_1 = phi;
-
 
 
 

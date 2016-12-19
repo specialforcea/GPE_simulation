@@ -5,7 +5,7 @@ d_fourier_phi = 2i*pi/L*lin_n.*fourier_phi;
 dphi = inverse_ft(d_fourier_phi,Nx,deltaf);
 
 kin = sq(dphi)./2;
-pot = (0/2*X.*X + 0*sq(phi) + V.*sin(k_scale.*X).^2).*sq(phi);
+pot = (1/2*X.*X + Beta*sq(phi) + V.*sin(k_scale.*X).^2).*sq(phi);
 tot = kin + pot;
 tot_L = tot(1:Nx-1);
 tot_H = tot(2:Nx);

@@ -1,5 +1,5 @@
 function f = ODEs_define(t,c)
-order = 1;%to nth order
+order = 3;%to nth order
 hbar = 1.05*10^-34;
 Rb_Mass = 1.42*10^-25;% mass of Rb87 in Kg
 raman_wavelength = 790*10^-9; % raman beam wave length
