@@ -60,12 +60,7 @@ eigens(2,:) = -sqrt(sq(CA) + sq(CC));
 eigens(3,:) = sqrt(sq(CA) + sq(CC));
 
 for i = 1:Nx
-    phi_up(:,i) = MatV(:,:,i)*(exp(-eigens(:,i).*Deltat).*(MatB(:,:,i)*phi_up(:,i)));
+    exp(MatB(:,:,i)*phi_up(:,i)
 end
-phi_up = phi_up/norm1d(phi_up, Nx, deltax);
-
-end
-
-
 
 

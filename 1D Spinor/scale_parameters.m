@@ -29,3 +29,5 @@ f = (0:1:Nx-1)-(Nx-1)/2;% momentum space
 k_spacing = k_scale*(xmax-xmin)/pi;%2*k_scale in f space. 
 lattice_pot = 4*E_r;
 V = lattice_pot/quanta;
+real_Omega = 20000;%Raman coupling in Hz
+Omega = real_Omega/Dip_freq;%rescaled coupling strength

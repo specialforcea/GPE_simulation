@@ -35,7 +35,7 @@ draw = 0;
 
 while (t < Stop_time)
     %fftphi = strang_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
-    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0,c2,Omega);
+    fftphi = time_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL,c0,c2,Omega);
     t = t - 1i*Deltat;
     n = n + 1;
     chem = chem_pot(fftphi,fftX,fftNx,Beta,k_scale,deltax,deltaf,V,fftL);
