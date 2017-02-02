@@ -23,7 +23,7 @@ X = linspace(xmin,xmax,Nx);
 %chem_potential = zeros(1,int16(Stop_time/Deltat));
 t = 0;
 fftNx = Nx -1;
-fftphi = phi(1:fftNx);
+fftphi = phi(:,1:fftNx);
 fftX = X(1:fftNx);
  fftL = L - deltax;
  fftf = f(1:fftNx);
@@ -35,10 +35,10 @@ draw = 0;
 
 while (t < Stop_time)
     %fftphi = strang_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
-    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0,c2,Omega);
+    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0,c2,Omega,k_scale);
     t = t - 1i*Deltat;
     n = n + 1;
-    chem = chem_pot(fftphi,fftX,fftNx,Beta,k_scale,deltax,deltaf,V,fftL);
+    %chem = chem_pot(fftphi,fftX,fftNx,Beta,k_scale,deltax,deltaf,V,fftL);
    %chem_potential(n) = chem;
     
     if (mod(n,evo)==0 && draw == 1)
@@ -56,8 +56,8 @@ while (t < Stop_time)
     end
     
 end
-phi_2 = zeros(1,Nx);
-phi_2(1:fftNx) = fftphi;
-phi_2(Nx) = phi_2(1);
+phi_2 = zeros(3,Nx);
+phi_2(:,1:fftNx) = fftphi;
+phi_2(:,Nx) = phi_2(:,1);
 %phi_2 = fftphi;
 end

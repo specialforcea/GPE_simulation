@@ -1,5 +1,5 @@
 Deltat = 1e-8;
-Stop_crit = 1e-7;
+Stop_crit = 1e-8;
 
 
 
@@ -7,7 +7,7 @@ potential = @(x)(1/2*x.^2);
 
 
 init_spin = [1 0 0];
-phi_0 = Thomas_fermi1D(Beta,X,TF_radius,potential(X),Nx,deltax);
+phi_0 = Thomas_fermi1D(c0,X,TF_radius,potential(X),Nx,deltax);
 phi = phi_0;
 difference = 1;
 evo = 200;
