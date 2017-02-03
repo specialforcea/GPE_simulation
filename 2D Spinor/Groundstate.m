@@ -7,7 +7,7 @@ potential = @(x,y)(1/2*x.^2 + 1/2*y.^2);
 
 
 init_spin = [1 0 0];
-phi_0 = Thomas_fermi1D(c0,X,TF_radius,potential(X),Nx,deltax);
+phi_0 = Thomas_fermi2D(c0,X,Y,TF_radius,potential(X,Y));
 phi = phi_0;
 difference = 1;
 evo = 200;
@@ -28,7 +28,10 @@ while (difference)
     
 end
 
-phi_0 = [init_spin(1).*phi;init_spin(2).*phi;init_spin(3).*phi];
+
+phi_0(:,:,2) = init_spin(2).*phi;
+phi_0(:,:,3) = init_spin(3).*phi;
+phi_0(:,:,1) = init_spin(1).*phi;
 
 
 

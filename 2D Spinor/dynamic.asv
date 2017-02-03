@@ -27,8 +27,8 @@ t = 0;
 fftNx = Nx -1;
 fftNy = Ny -1;
 fftphi = phi(1:fftNx,1:fftNy,:);
-fftX = X(1:fftNx,1:fftNy);
-fftY = Y(1:fftNx,1:fftNy);
+fftX = X(1:fftNx);
+fftY = Y(1:fftNy);
 fftL = L - deltax;
 fftf = f(1:fftNx);
 %fftphi = phi;
@@ -63,6 +63,6 @@ end
 phi_2 = zeros(Nx,Ny,3);
 phi_2(1:fftNx,1:fftNy,:) = fftphi;
 phi_2(Nx,:,:) = phi_2(1,:,:);
-phi_2(:,Ny,:) = phi_2(:,1,:);
+phi_2(:,Ny,:) = phi_2(:,1,
 %phi_2 = fftphi;
 end
