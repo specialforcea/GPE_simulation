@@ -1,13 +1,13 @@
-Deltat = 1e-9;
-Stop_crit = 1e-9;
+Deltat = 1e-8;
+Stop_crit = 1e-8;
 
 
 
-potential = @(x)(1/2*x.^2);
+potential = @(x,y)(1/2*x.^2 + 1/2*y.^2);
 
-phi = zeros(3,Nx
+
 init_spin = [1 0 0];
-phi_0 = Thomas_fermi1D(Beta,X,TF_radius,potential(X),Nx,deltax);
+phi_0 = Thomas_fermi1D(c0,X,TF_radius,potential(X),Nx,deltax);
 phi = phi_0;
 difference = 1;
 evo = 200;
@@ -28,10 +28,7 @@ while (difference)
     
 end
 
-phi_10 = init_spin(1).*phi;
-phi_00 = init_spin(2).*phi;
-phi_m10 = init_spin(3).*phi;
-
+phi_0 = [init_spin(1).*phi;init_spin(2).*phi;init_spin(3).*phi];
 
 
 

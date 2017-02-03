@@ -39,10 +39,10 @@ phi_up(3,:) = inverse_ft(fourier_phi_evo(3,:),Nx,deltaf);
 
 phi_up = phi_up/norm1d(phi_up, Nx, deltax);
 
-CA = -0*exp(-1i*2*k_scale*X) + c2*phi_up(2,:).*conj(phi_up(3,:));%coupling between 1 and 0
-CC = -0*exp(-1i*2*k_scale*X) + c2*phi_up(1,:).*conj(phi_up(2,:));%coupling between -1 and 0
+CA = -Omega*exp(-1i*2*k_scale*X) + c2*phi_up(2,:).*conj(phi_up(3,:));%coupling between 1 and 0
+CC = -Omega*exp(-1i*2*k_scale*X) + c2*phi_up(1,:).*conj(phi_up(2,:));%coupling between -1 and 0
 
-MatV = CC./((sqrt(1+sq(CC)./sq(CA))).*conj(CA));
+MatV = -CC./((sqrt(1+sq(CC)./sq(CA))).*conj(CA));
 MatV(2,:) = zeros(1,Nx);
 MatV(3,:) = 1./sqrt(1 + sq(CC)./sq(CA));
 MatV(1,:,2) = CA./(sqrt(2*(sq(CA) + sq(CC))./sq(CC)).*conj(CC));
@@ -54,6 +54,7 @@ MatV(3,:,3) = sqrt(sq(CC))./sqrt(2.*(sq(CA)+sq(CC)));
 
 MatV = permute(MatV,[1,3,2]);
 MatB = permute(MatV,[2,1,3]);
+MatB = conj(MatB);
 
 eigens = zeros(3,Nx);
 eigens(1,:) = zeros(1,Nx);
