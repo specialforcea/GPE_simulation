@@ -1,4 +1,4 @@
-function y = inverse_ft2(phi,parity,paritx,deltafx,deltafy,Nx,Ny)
+function y = inverse_ft2(phi,paritx,parity,deltafx,deltafy,Nx,Ny)
 
 
 phi_1 = paritx.*phi;

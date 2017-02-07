@@ -1,34 +1,34 @@
 function phi_up = time_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,L,c0,c2,Omega,k_scale,paritx,parity,dispersion)
 
-density = sq(phi);
+% density = sq(phi);
+% 
+% tot_density = sum(density,3);
+% pot = potential(X,Y);
+% pot(:,:,2) = potential(X,Y);
+% pot(:,:,3) = potential(X,Y);
+% nonlin_pot = zeros(Nx,Ny,3);
+% nonlin_pot(:,:,1) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,2) - density(:,:,3));
+% nonlin_pot(:,:,2) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,3));
+% nonlin_pot(:,:,3) = c0.*tot_density + c2.*(density(:,:,3) + density(:,:,2) - density(:,:,1));
+% 
+% 
+% 
+% diag_pot = -Deltat.*(pot + nonlin_pot);
+% 
+% exp_pot = exp(diag_pot);
+% 
+% phi_up = exp_pot.*phi;
+phi_up = phi;
+% fourier_phi = fourier_transform2(phi_up,paritx,parity,deltax,deltay);
+% 
+% fourier_phi_evo = exp(dispersion.*Deltat).*fourier_phi;
+% 
+% phi_up = inverse_ft2(fourier_phi_evo,paritx,parity,deltafx,deltafy,Nx,Ny);
+% 
+% phi_up = phi_up/norm2d(phi_up, Nx,Ny, deltax,deltay);
 
-tot_density = sum(density,3);
-pot = potential(X,Y);
-pot(:,:,2) = potential(X,Y);
-pot(:,:,3) = potential(X,Y);
-nonlin_pot = zeros(Nx,Ny,3);
-nonlin_pot(:,:,1) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,2) - density(:,:,3));
-nonlin_pot(:,:,2) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,3));
-nonlin_pot(:,:,3) = c0.*tot_density + c2.*(density(:,:,3) + density(:,:,2) - density(:,:,1));
-
-
-
-diag_pot = -Deltat.*(pot + nonlin_pot);
-
-exp_pot = exp(diag_pot);
-
-phi_up = exp_pot.*phi;
-
-fourier_phi = fourier_transform2(phi_up,paritx,parity,deltax,deltay);
-
-fourier_phi_evo = exp(dispersion.*Deltat).*fourier_phi;
-
-phi_up = inverse_ft2(fourier_phi_evo,paritx,parity,deltafx,deltafy,Nx,Ny);
-
-phi_up = phi_up/norm2d(phi_up, Nx,Ny, deltax,deltay);
-
-CA = -Omega*exp(-1i*2*k_scale*X) + c2*phi_up(:,:,2).*conj(phi_up(:,:,3));%coupling between 1 and 0
-CC = -Omega*exp(-1i*2*k_scale*X) + c2*phi_up(:,:,1).*conj(phi_up(:,:,2));%coupling between -1 and 0
+CA = -500*exp(-1i*2*k_scale*X) + 0*phi_up(:,:,2).*conj(phi_up(:,:,3));%coupling between 1 and 0
+CC = -500*exp(-1i*2*k_scale*X) + 0*phi_up(:,:,1).*conj(phi_up(:,:,2));%coupling between -1 and 0
 
 CAr = reshape(CA,[1,Nx^2]);
 CCr = reshape(CC,[1,Nx^2]);

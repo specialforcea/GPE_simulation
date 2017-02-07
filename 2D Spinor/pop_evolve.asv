@@ -10,5 +10,5 @@ for i = 1:evoN
     population(2,i) = integr2d(sq(phi_evo(:,:,2)),Nx,Ny,deltax,deltay);
     population(3,i) = integr2d(sq(phi_evo(:,:,3)),Nx,Ny,deltax,deltay);
 end
-popN = linspace(1e-4,1e-4*41,42);
-plot(popN,population(:,1:42)')
+popN = linspace(1e-4,1e-4*79,80);
+plot(popN,population(:,1:80)')

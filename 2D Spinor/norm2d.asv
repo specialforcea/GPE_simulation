@@ -1,9 +1,0 @@
-function y = norm2d(phi, Nx, Ny, deltax,deltay)
-phi_1 = conj(phi).*phi;
-phi_1 = sum(phi_1,3);
-phi_L = phi_1(1:Nx-1);
-phi_H = phi_1(2:Nx);
-phi_avg = (phi_H+phi_L)/2;
-y = sum(phi_avg)*DeltaX;
-y = sqrt(y);
-end
