@@ -29,8 +29,8 @@ phi_up = inverse_ft2(fourier_phi_evo,paritx,parity,deltafx,deltafy,Nx,Ny);
 
 phi_up = phi_up/norm2d(phi_up, Nx,Ny, deltax,deltay);
 
-CA = -Omega*exp(-1i*0*k_scale*X) + c2*phi_up(:,:,2).*conj(phi_up(:,:,3));%coupling between 1 and 0
-CC = -Omega*exp(-1i*0*k_scale*X) + c2*phi_up(:,:,1).*conj(phi_up(:,:,2));%coupling between -1 and 0
+CA = -Omega*exp(-1i*2*k_scale*X) + c2*phi_up(:,:,2).*conj(phi_up(:,:,3));%coupling between 1 and 0
+CC = -Omega*exp(-1i*2*k_scale*X) + c2*phi_up(:,:,1).*conj(phi_up(:,:,2));%coupling between -1 and 0
 
 CAr = reshape(CA,[1,Nx^2]);
 CCr = reshape(CC,[1,Nx^2]);
