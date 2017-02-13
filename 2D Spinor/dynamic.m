@@ -1,10 +1,10 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion)
+function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion,TF_radius)
 
  
 Stop_time = t_evo;
 
 
-TF_radius = (4*c0/pi)^(1/4);
+%TF_radius = (4*c0/pi)^(1/4);
 xmin = -TF_radius;
 xmax = TF_radius;
 ymin = -TF_radius;
