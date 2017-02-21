@@ -33,7 +33,7 @@ fftL = L - deltax;
 fftf = f(1:fftNx);
 %fftphi = phi;
 Deltat = 1i*Deltat;
-evo = 500;
+evo = 1;
 n = 0;
 draw = 0;
 
@@ -46,16 +46,18 @@ while (t < Stop_time)
    %chem_potential(n) = chem;
     
     if (mod(n,evo)==0 && draw == 1)
-        fphi = fourier_transform(fftphi,fftNx,deltax);
+        fphi = fourier_transform2(fftphi,paritx,parity,deltax,deltay);
         %fphi = fphi./norm1d(fphi,Nx,DeltaX);
         b = fphi.*conj(fphi);
         
-        kin = ave_kin(fftphi,fftNx,deltax,deltaf,fftL);
-        kin2 = ave_kin2(fftphi,fftNx,deltax,deltaf,fftL);
-        pot = ave_pot(fftphi,fftNx,deltax,fftX,V,k_scale,Beta);
-        plot(fftf,b);
-        title(strcat(num2str(chem),'||',num2str(kin),'||',num2str(pot),'||',num2str(kin2)));
-        drawnow;
+%         kin = ave_kin(fftphi,fftNx,deltax,deltaf,fftL);
+%         kin2 = ave_kin2(fftphi,fftNx,deltax,deltaf,fftL);
+%         pot = ave_pot(fftphi,fftNx,deltax,fftX,V,k_scale,Beta);
+       % surf(fftf,fftf,b(:,:,2));
+       % title(strcat(num2str(chem),'||',num2str(kin),'||',num2str(pot),'||',num2str(kin2)));
+       plot(fftf,b(fftNx/2,:,2)); 
+       drawnow;
+        
         
     end
     
