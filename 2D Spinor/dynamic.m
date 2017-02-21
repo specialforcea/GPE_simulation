@@ -1,4 +1,4 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion,TF_radius)
+function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion,TF_radius,detuning)
 
  
 Stop_time = t_evo;
@@ -39,7 +39,7 @@ draw = 0;
 
 while (t < Stop_time)
     %fftphi = strang_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
-    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftY,fftNx,fftNy,deltax,deltay,deltafx,deltafy,fftL,c0,c2,Omega,k_scale,paritx,parity,dispersion);
+    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftY,fftNx,fftNy,deltax,deltay,deltafx,deltafy,fftL,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning);
     t = t - 1i*Deltat;
     n = n + 1;
     %chem = chem_pot(fftphi,fftX,fftNx,Beta,k_scale,deltax,deltaf,V,fftL);

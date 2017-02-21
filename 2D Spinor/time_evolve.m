@@ -1,4 +1,4 @@
-function phi_up = time_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,L,c0,c2,Omega,k_scale,paritx,parity,dispersion)
+function phi_up = time_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,L,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning)
 
 density = sq(phi);
 
@@ -8,8 +8,8 @@ pot(:,:,2) = potential(X,Y);
 pot(:,:,3) = potential(X,Y);
 nonlin_pot = zeros(Nx,Ny,3);
 nonlin_pot(:,:,1) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,2) - density(:,:,3));
-nonlin_pot(:,:,2) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,3))- 850.7826;
-nonlin_pot(:,:,3) = c0.*tot_density + c2.*(density(:,:,3) + density(:,:,2) - density(:,:,1))-850.7826*2;
+nonlin_pot(:,:,2) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,3))- detuning;
+nonlin_pot(:,:,3) = c0.*tot_density + c2.*(density(:,:,3) + density(:,:,2) - density(:,:,1)) - 2*detuning;
 
 
 

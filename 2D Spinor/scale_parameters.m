@@ -43,3 +43,4 @@ real_Omega = 20000;%Raman coupling in Hz
 Omega = real_Omega/Dip_freq;%rescaled coupling strength
 [paritx,parity] = fourier_parity(Nx,Ny);
 dispersion = fourier_dispersion(Nx,Ny,Lx,Ly);
+detuning = E_r/(hbar*Dip_freq);%recoil energy is defined with 2k_l
