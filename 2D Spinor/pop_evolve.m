@@ -1,11 +1,11 @@
-evo_time = 0.12;
+evo_time = 0.08;
 Deltat_count = 1e-4;
 Deltat = 5e-5;
 evoN = int16(evo_time/Deltat_count);
 fp00 = zeros(evoN,2);
-phi_evo = phi_0;
+%phi_evo = phi_0;
 for i = 1:evoN
-    phi_evo = dynamic(phi_evo,Deltat_count,Deltat,0*c0,0*c2,Nx,Ny,V,k_scale,fx,deltax,deltay,deltafx,deltafy,Lx,Omega,paritx,parity,dispersion,TF_radius,detuning);
+    phi_evo = dynamic(phi_evo,Deltat_count,Deltat,10*c0,1*c2,Nx,Ny,V,k_scale,fx,deltax,deltay,deltafx,deltafy,Lx,Omega,paritx,parity,dispersion,TF_radius,detuning);
     phi_evo = phi_evo./norm2d(phi_evo, Nx,Ny, deltax,deltay);
     
     fp00(i,:) = find_peak2d(phi_evo,k_spacing,Nx,Ny,deltafx,deltafy,deltax,deltay,paritx,parity);
