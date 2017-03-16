@@ -1,0 +1,25 @@
+function phi_up = imtime_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,L,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning)
+
+mat_pot = potential(X,Y);
+mat_nonlin_pot = Beta*phi.*conj(phi);
+
+diag_pot = -Deltat*(mat_pot + mat_nonlin_pot);
+
+exp_pot = exp(diag_pot);
+
+phi_up = exp_pot.*phi;
+%phi_up = phi_up/norm1d(phi_up, Nx, DeltaX);
+
+disper = dispersion(:,:,1);
+evol = exp(dispersion);
+
+fourier_phi = fourier_transform2(phi_up,paritx,parity,deltax,deltay);
+%fourier_phi = fourier_phi./norm1d(fourier_phi,Nx,DeltaX);
+fourier_phi_evo = evol.*fourier_phi;
+
+phi_up = inverse_ft(fourier_phi_evo,Nx,deltaf);
+
+phi_up = phi_up/norm1d(phi_up, Nx, deltax);
+end
+
+
