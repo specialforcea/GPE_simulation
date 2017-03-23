@@ -40,6 +40,12 @@ phi_up = zeros(Nx,Ny);
 phi_up(1:fftNx,1:fftNy) = fftphi;
 phi_up(Nx,:) = phi_up(1,:);
 phi_up(:,Ny) = phi_up(:,1);
+r1 = randn(Nx,Ny) + 1i*randn(Nx,Ny);
+r1 = r1/norm2d(r1,Nx,Ny,deltax,deltay);
+r2 = r1 - integr2d(conj(phi_up).*r1,Nx,Ny,deltax,deltay);
+phi_up = phi_up + r2;
+
+
 
 phi_0(:,:,2) = init_spin(2).*phi_up;
 phi_0(:,:,3) = init_spin(3).*phi_up;
