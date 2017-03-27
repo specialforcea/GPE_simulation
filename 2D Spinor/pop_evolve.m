@@ -1,4 +1,4 @@
-evo_time = 0.5;
+evo_time = 11;
 Deltat_count = 1e-4;
 Deltat = 5e-5;
 evoN = int16(evo_time/Deltat_count);
