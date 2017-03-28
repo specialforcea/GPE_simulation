@@ -1,7 +1,7 @@
 
 
 
-randm = 0.1;
+randm = 0.9;
 while(randm < 1)
 phi_up = zeros(Nx,Ny);
 phi_up(1:fftNx,1:fftNy) = fftphi;
