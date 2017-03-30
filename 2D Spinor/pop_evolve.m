@@ -7,7 +7,7 @@ evoN = int16(evo_time/Deltat_count);
 phi_evo = phi_0;
 population11 = zeros(3,evoN);
 for i = 1:evoN
-    phi_evo = dynamic(phi_evo,Deltat_count,Deltat,1*c0,1*c2,Nx,Ny,V,k_scale,fx,deltax,deltay,deltafx,deltafy,Lx,Omega,paritx,parity,dispersion,TF_radius,detuning);
+    phi_evo = dynamic(phi_evo,Deltat_count,Deltat,1*c0,1*c2,Nx,Ny,V,k_scale,fx,deltax,deltay,deltafx,deltafy,Lx,Omega,paritx(1:fftNx,1:fftNy,:),parity(1:Nx-1,1:Ny-1,:),dispersion,TF_radius,detuning);
     phi_evo = phi_evo./norm2d(phi_evo, Nx,Ny, deltax,deltay);
     
 %     phi_save(:,:,:,i) = phi_evo;
