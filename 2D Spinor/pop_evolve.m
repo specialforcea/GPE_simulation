@@ -1,4 +1,4 @@
-evo_time = pi/Omega;
+evo_time = pi/Omega/4;
 Deltat_count = 1e-4;
 Deltat = 1e-5;
 evoN = int16(evo_time/Deltat_count);
