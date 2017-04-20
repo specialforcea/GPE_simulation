@@ -23,7 +23,7 @@ evo = 200;
 n = 0;
 while (difference)
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
-    phi_up = imtime_evolve(fftphi, potential, Deltat, fftX,fftY, fftNx,fftNy, deltax,deltay,deltafx,deltafy,c0,paritx,parity,dispersion);
+    phi_up = imtime_evolve(fftphi, potential, Deltat, fftX,fftY, fftNx,fftNy, deltax,deltay,deltafx,deltafy,c0,paritx(1:fftNx,1:fftNy,:),parity(1:fftNx,1:fftNy,:),dispersion);
     if (max(abs(phi_up(:)-fftphi(:))) < Stop_crit)
         difference = 0;
     end
@@ -43,7 +43,7 @@ phi_up(:,Ny) = phi_up(:,1);
 r1 = randn(Nx,Ny) + 1i*randn(Nx,Ny);
 r1 = r1/norm2d(r1,Nx,Ny,deltax,deltay);
 r2 = r1 - integr2d(conj(phi_up).*r1,Nx,Ny,deltax,deltay).*phi_up;
-phi_up = phi_up + 0.05*r2;
+phi_up = phi_up + 0.1*r2;
 
 
 
