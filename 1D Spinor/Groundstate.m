@@ -14,7 +14,7 @@ evo = 200;
 n = 0;
 while (difference)
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
-    phi_up = time_evolve(phi, potential,Deltat,X,c0,Nx,deltax,deltaf,L );
+    phi_up = time_evolve(phi, potential,Deltat,X,Nx,deltax,deltaf,L,c0,c2,Omega,k_scale);
     if (max(abs(phi_up-phi)) < Stop_crit)
         difference = 0;
     end

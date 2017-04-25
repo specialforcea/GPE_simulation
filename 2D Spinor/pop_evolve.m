@@ -1,15 +1,18 @@
-evo_time = 0.3;
+evo_time = 0.1;
+% time = [0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.1];
 Deltat_count = 1e-4;
+% timeN = time./Deltat_count;
 Deltat = 1e-5;
 evoN = int16(evo_time/Deltat_count);
+phifindout = zeros(Nx,Ny,3,evoN);
 %phi_half = zeros(Nx,Ny,3,evoN);
 % ksp = zeros(Nx,Ny,2,50,4);
-nn = 0;
+
 %fp1 = zeros(evoN,2,4);
-real_Omega = 3*2.34*1e4;
-fpr = zeros(evoN,2);
+real_Omega = 5.36*2.34*1e4;
+% fpr = zeros(evoN,2);
 %for j = 1:3
-phi_evo = phi_0;
+phi_evo = phi;
 
 % nn = 0;
 Omega = real_Omega/Dip_freq;
@@ -18,6 +21,11 @@ for i = 1:evoN
     phi_evo = dynamic(phi_evo,Deltat_count,Deltat,1*c0,1*c2,Nx,Ny,V,k_scale,fx,deltax,deltay,deltafx,deltafy,Lx,Omega,paritx(1:Nx-1,1:Ny-1,:),parity(1:Nx-1,1:Ny-1,:),dispersion,TF_radius,detuning);
     phi_evo = phi_evo./norm2d(phi_evo, Nx,Ny, deltax,deltay);
     
+    
+    
+    phifindout(:,:,:,i) = phi_evo;
+    
+
     
 %     if mod(i,100) == 0
 %         nn = nn + 1;
@@ -28,14 +36,14 @@ for i = 1:evoN
 % %         ksp(:,:,1,nn,j) = ff(:,:,1);
 % %         ksp(:,:,2,nn,j) = ff(:,:,2);
 %     end
-    ff = fourier_transform2(phi_evo,paritx,parity,deltax,deltay);
-    ff = ff/norm2d(ff,Nx,Ny,deltafx,deltafy);
-    [colmax,rowind] = max(sq(ff(:,:,1)));
-    [~,colind] = max(colmax);
-    fpr(i,1) = integr2d(sq(ff(rowind(colind)-20:rowind(colind)+20,colind-20:colind+20,1)),41,41,deltafx,deltafy);
-    [colmax,rowind] = max(sq(ff(:,:,2)));
-    [~,colind] = max(colmax);
-    fpr(i,2) = integr2d(sq(ff(rowind(colind)-20:rowind(colind)+20,colind-20:colind+20,2)),41,41,deltafx,deltafy);
+%     ff = fourier_transform2(phi_evo,paritx,parity,deltax,deltay);
+%     ff = ff/norm2d(ff,Nx,Ny,deltafx,deltafy);
+%     [colmax,rowind] = max(sq(ff(:,:,1)));
+%     [~,colind] = max(colmax);
+%     fpr(i,1) = integr2d(sq(ff(rowind(colind)-20:rowind(colind)+20,colind-20:colind+20,1)),41,41,deltafx,deltafy);
+%     [colmax,rowind] = max(sq(ff(:,:,2)));
+%     [~,colind] = max(colmax);
+%     fpr(i,2) = integr2d(sq(ff(rowind(colind)-20:rowind(colind)+20,colind-20:colind+20,2)),41,41,deltafx,deltafy);
 %     phi_save(:,:,:,i) = phi_evo;
     
 %     fp00(i,:) = find_peak2d(phi_evo,k_spacing,Nx,Ny,deltafx,deltafy,deltax,deltay,paritx,parity);
