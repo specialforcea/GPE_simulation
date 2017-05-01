@@ -43,13 +43,13 @@ for i = 1:evoN
     ff = ff/norm2d(ff,Nx,Ny,deltafx,deltafy);
     [colmax,rowind] = max(sq(ff(:,:,1)));
     [~,colind] = max(colmax);
-    fpr(i,1,yy,yyy) = integr2d(sq(ff(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),max(1,colind-20):min(Nx,colind+20),1)),size(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20)),size(max(1,colind-20):min(Nx,colind+20)),deltafx,deltafy);
+    fpr(i,1,yy,yyy) = integr2d(sq(ff(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),max(1,colind-20):min(Nx,colind+20),1)),size(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),2),size(max(1,colind-20):min(Nx,colind+20),2),deltafx,deltafy);
     [colmax,rowind] = max(sq(ff(:,:,2)));
     [~,colind] = max(colmax);
-    fpr(i,2,yy,yyy) = integr2d(sq(ff(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20,colind-20:colind+20,2)),41,41,deltafx,deltafy);
+    fpr(i,2,yy,yyy) = integr2d(sq(ff(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),max(1,colind-20):min(Nx,colind+20),2)),size(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),2),size(max(1,colind-20):min(Nx,colind+20),2),deltafx,deltafy);
     [colmax,rowind] = max(sq(ff(:,:,3)));
     [~,colind] = max(colmax);
-    fpr(i,3,yy,yyy) = integr2d(sq(ff(rowind(colind)-20:rowind(colind)+20,1:colind+20,3)),41,size(1:colind+20,2),deltafx,deltafy);
+    fpr(i,3,yy,yyy) = integr2d(sq(ff(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),max(1,colind-20):min(Nx,colind+20),3)),size(max(1,rowind(colind)-20):min(Ny,rowind(colind)+20),2),size(max(1,colind-20):min(Nx,colind+20),2),deltafx,deltafy);
 %     phi_save(:,:,:,i) = phi_evo;
     
 %     fp00(i,:) = find_peak2d(phi_evo,k_spacing,Nx,Ny,deltafx,deltafy,deltax,deltay,paritx,parity);

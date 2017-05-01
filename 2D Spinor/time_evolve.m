@@ -8,7 +8,7 @@ pot(:,:,2) = potential(X,Y);
 pot(:,:,3) = potential(X,Y);
 nonlin_pot = zeros(Nx,Ny,3);
 nonlin_pot(:,:,1) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,2) - density(:,:,3));
-nonlin_pot(:,:,2) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,3))- detuning;
+nonlin_pot(:,:,2) = c0.*tot_density + c2.*(density(:,:,1) + density(:,:,3))- 212.6956;
 nonlin_pot(:,:,3) = c0.*tot_density + c2.*(density(:,:,3) + density(:,:,2) - density(:,:,1)) - 2*detuning;
 
 
