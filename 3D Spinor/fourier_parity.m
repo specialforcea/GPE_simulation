@@ -33,7 +33,7 @@ paritx = par;
 paritx(:,:,:,2) = par;
 paritx(:,:,:,3) = par;
 
-unisurface = ones(Nx,Nz);
+unisurface = ones(Nx-1,Nz-1);
 for i = 1:Ny-1
 	par(i,:,:) = (-1)^i*unisurface;
 end
@@ -42,7 +42,7 @@ parity(:,:,:,2) = par;
 parity(:,:,:,3) = par;
 
 
-unisurface = ones(Ny,Nx);
+unisurface = ones(Ny-1,Nx-1);
 for i = 1:Nz-1
 	par(:,:,i) = (-1)^i*unisurface;
 end

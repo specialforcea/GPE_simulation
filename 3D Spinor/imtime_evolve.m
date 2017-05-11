@@ -1,4 +1,4 @@
-function phi_up = imtime_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,c0,paritx,parity,dispersion)
+function phi_up = imtime_evolve(phi, potential, Deltat, X,Y,Z, Nx,Ny,Nz, deltax,deltay,deltaz,deltafx,deltafy,deltafz,c0,paritx,parity,paritz,dispersion)
 
 mat_pot = potential(X,Y,Z);
 mat_nonlin_pot = c0*phi.*conj(phi);
@@ -17,9 +17,9 @@ fourier_phi = fourier_transform3(phi_up,paritx(:,:,:,1),parity(:,:,:,1),paritz(:
 %fourier_phi = fourier_phi./norm1d(fourier_phi,Nx,DeltaX);
 fourier_phi_evo = evol.*fourier_phi;
 
-phi_up = inverse_ft3(fourier_phi_evo,paritx(:,:,:,1),parity(:,:,:,1),parity(:,:,:,1),deltafx,deltafy,deltafx,Nx,Ny,Nz);
+phi_up = inverse_ft3(fourier_phi_evo,paritx(:,:,:,1),parity(:,:,:,1),paritz(:,:,:,1),deltafx,deltafy,deltafz,Nx,Ny,Nz);
 
-phi_up = phi_up/norm3d(phi_up, Nx, Ny, deltax,deltay);
+phi_up = phi_up/norm3d(phi_up, Nx, Ny,Nz, deltax,deltay,deltaz);
 end
 
 

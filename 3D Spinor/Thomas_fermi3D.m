@@ -1,4 +1,4 @@
-function [phi_0] = Thomas_fermi2D(Beta,potential)
+function [phi_0] = Thomas_fermi3D(Beta,potential)
 
 
 phi_0 = sqrt(max(0,(1/2*(15*Beta/4/pi)^(2/5) - potential)/Beta)); % Computing the Thomas-Fermi approximation

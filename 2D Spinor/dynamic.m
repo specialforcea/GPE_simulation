@@ -1,25 +1,21 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion,TF_radius,detuning)
+function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,X,Y,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion,detuning)
 
  
 Stop_time = t_evo;
 
 
 %TF_radius = (4*c0/pi)^(1/4);
-xmin = -TF_radius;
-xmax = TF_radius;
-ymin = -TF_radius;
-ymax = TF_radius;
 
 
-unity = ones(Nx,1);
+
+
 
 
 
 potential = @(x,y)(1/2*x.^2 + 1/2*y.^2);
 %order = 2;
 
-X = unity * linspace(xmin,xmax,Nx);% x space
-Y = linspace(ymin,ymax,Ny)' * unity';% x space
+
 %N_tf = int16(TF_radius/DeltaX);
 %cutX = X < TF_radius;
 %chem_potential = zeros(1,int16(Stop_time/Deltat));

@@ -51,7 +51,7 @@ Y = Ya;
 Z = zeros(Ny,Nx,Nz);
 for i = 1:Nz
 	X(:,:,i) = Xa;
-	Y(:,;,i) = Ya;
+	Y(:,:,i) = Ya;
 	Z(:,:,i) = Za(i)*ones(Ny,Nx);
 end
 

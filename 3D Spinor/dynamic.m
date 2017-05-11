@@ -1,36 +1,31 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,Ny,V,k_scale,f,deltax,deltay,deltafx,deltafy,L,Omega,paritx,parity,dispersion,TF_radius,detuning)
+function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,X,Y,Z,Nx,Ny,Nz,V,k_scale,fx,fy,fx,deltax,deltay,deltaz,deltafx,deltafy,deltafz,L,Omega,paritx,parity,paritz,dispersion,TF_radius,detuning)
 
  
 Stop_time = t_evo;
 
 
-%TF_radius = (4*c0/pi)^(1/4);
-xmin = -TF_radius;
-xmax = TF_radius;
-ymin = -TF_radius;
-ymax = TF_radius;
-
-
-unity = ones(Nx,1);
 
 
 
-potential = @(x,y)(1/2*x.^2 + 1/2*y.^2);
+potential = @(x,y)(1/2*x.^2 + 1/2*y.^2 + 1/2*z.^2);
 %order = 2;
 
-X = unity * linspace(xmin,xmax,Nx);% x space
-Y = linspace(ymin,ymax,Ny)' * unity';% x space
 %N_tf = int16(TF_radius/DeltaX);
 %cutX = X < TF_radius;
 %chem_potential = zeros(1,int16(Stop_time/Deltat));
 t = 0;
 fftNx = Nx -1;
 fftNy = Ny -1;
-fftphi = phi(1:fftNx,1:fftNy,:);
-fftX = X(1:fftNx,1:fftNy);
-fftY = Y(1:fftNx,1:fftNy);
+fftNz = Nz -1;
+fftphi = phi(1:fftNy,1:fftNx,1:fftNz,:);
+fftX = X(1:fftNy,1:fftNx,1:fftNz);
+fftY = Y(1:fftNx,1:fftNy,1:fftNz);
+fftZ = Z(1:fftNx,1:fftNy,1:fftNz);
+
 fftL = L - deltax;
-fftf = f(1:fftNx);
+fftfx = f(1:fftNx);
+fftfy = fy(1:fftNy);
+fftfz = fz(1:fftNz);
 %fftphi = phi;
 Deltat = 1i*Deltat;
 evo = 1;
@@ -39,7 +34,7 @@ draw = 0;
 
 while (t < Stop_time)
     %fftphi = strang_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
-    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftY,fftNx,fftNy,deltax,deltay,deltafx,deltafy,fftL,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning);
+    fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftY,fftZ,fftNx,fftNy,fftNz,deltax,deltay,deltaz,deltafx,deltafy,deltafz,fftL,c0,c2,Omega,k_scale,paritx,parity,paritz,dispersion,detuning);
     t = t - 1i*Deltat;
     n = n + 1;
     %chem = chem_pot(fftphi,fftX,fftNx,Beta,k_scale,deltax,deltaf,V,fftL);
@@ -62,9 +57,10 @@ while (t < Stop_time)
     end
     
 end
-phi_2 = zeros(Nx,Ny,3);
-phi_2(1:fftNx,1:fftNy,:) = fftphi;
-phi_2(Nx,:,:) = phi_2(1,:,:);
-phi_2(:,Ny,:) = phi_2(:,1,:);
+phi_2 = zeros(Ny,Nx,Nz,3);
+phi_2(1:fftNy,1:fftNx,1:fftNz,:) = fftphi;
+phi_2(Ny,:,:,:) = phi_2(1,:,:,:);
+phi_2(:,Nx,:,:) = phi_2(:,1,:,:);
+phi_2(:,:,Nz,:) = phi_2(:,:,1,:);
 %phi_2 = fftphi;
 end

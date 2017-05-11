@@ -26,7 +26,7 @@ evo = 200;
 n = 0;
 while (difference)
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
-    phi_up = imtime_evolve(fftphi, potential, Deltat, fftX,fftY, fftNx,fftNy, deltax,deltay,deltafx,deltafy,c0,paritx(1:fftNx,1:fftNy,:),parity(1:fftNx,1:fftNy,:),dispersion);
+    phi_up = imtime_evolve(fftphi, potential, Deltat, fftX,fftY,fftY, fftNx,fftNy,fftNz,deltax,deltay,deltaz,deltafx,deltafy,deltafz,c0,paritx(1:fftNx,1:fftNy,1:fftNz,:),parity(1:fftNx,1:fftNy,1:fftNz,:),paritz(1:fftNx,1:fftNy,1:fftNz,:),dispersion);
     if (max(abs(phi_up(:)-fftphi(:))) < Stop_crit)
         difference = 0;
     end
