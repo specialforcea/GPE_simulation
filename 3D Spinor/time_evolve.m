@@ -1,4 +1,4 @@
-function phi_up = time_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,L,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning)
+function phi_up = time_evolve(phi, potential, Deltat, X,Y,Z, Nx,Ny,Nz, deltax,deltay,deltaz,deltafx,deltafy,deltafz,L,c0,c2,Omega,k_scale,paritx,parity,paritz,dispersion,detuning)
 
 density = sq(phi);
 

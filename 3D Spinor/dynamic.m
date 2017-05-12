@@ -1,4 +1,4 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,X,Y,Z,Nx,Ny,Nz,V,k_scale,fx,fy,fx,deltax,deltay,deltaz,deltafx,deltafy,deltafz,L,Omega,paritx,parity,paritz,dispersion,TF_radius,detuning)
+function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,X,Y,Z,Nx,Ny,Nz,V,k_scale,fx,fy,fz,deltax,deltay,deltaz,deltafx,deltafy,deltafz,L,Omega,paritx,parity,paritz,dispersion,TF_radius,detuning)
 
  
 Stop_time = t_evo;
@@ -7,7 +7,7 @@ Stop_time = t_evo;
 
 
 
-potential = @(x,y)(1/2*x.^2 + 1/2*y.^2 + 1/2*z.^2);
+potential = @(x,y,z)(1/2*x.^2 + 1/2*y.^2 + 1/2*z.^2);
 %order = 2;
 
 %N_tf = int16(TF_radius/DeltaX);
@@ -23,7 +23,7 @@ fftY = Y(1:fftNx,1:fftNy,1:fftNz);
 fftZ = Z(1:fftNx,1:fftNy,1:fftNz);
 
 fftL = L - deltax;
-fftfx = f(1:fftNx);
+fftfx = fx(1:fftNx);
 fftfy = fy(1:fftNy);
 fftfz = fz(1:fftNz);
 %fftphi = phi;

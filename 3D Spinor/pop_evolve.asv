@@ -17,14 +17,13 @@ fpr = zeros(evoN,3,6,5);
 % nn = 0;
 Omega = real_Omega/Dip_freq;
 for yy = 1:6
-for yyy = 1:5
-    phi_evo = phi_0;
+for yyy = 2:5
+    phi_evo = phi;
 
 for i = 1:evoN
-    cpt = cputime;
-    phi_evo = dynamic(phi_evo,Deltat_count,Deltat_count,c0,c2,X,Y,Z,Nx,Ny,Nz,V,k_scale,fx,fy,fz,deltax,deltay,deltaz,deltafx,deltafy,deltafz,Lx,Omega(yy),paritx,parity,paritz,dispersion,TF_radius,det(yyy)*detuning);
-    phi_evo = phi_evo./norm3d(phi_evo, Nx,Ny,Nz, deltax,deltay,deltaz);
-    cputime-cpt
+    phi_evo = dynamic(phi,Deltat_count,Deltat,c0,c2,X,Y,Z,Nx,Ny,Nz,V,k_scale,fx,fy,fz,deltax,deltay,deltaz,deltafx,deltafy,deltafz,Lx,Omega,paritx,parity,paritz,dispersion,TF_radius,detuning);
+    phi_evo = phi_evo./norm2d(phi_evo, Nx,Ny, deltax,deltay);
+    
     
     
     %phifindout(:,:,:,i) = phi_evo;
