@@ -3,11 +3,11 @@ Stop_crit = 1e-9;
 
 
 
-potential = @(x,y)(1/2*x.^2 + 1/2*y.^2);
+potential = @(x,y)(1/2*x.^2 + 1/2*gamma^2*y.^2);
 
 
 init_spin = [1 0 0];
-phi_0 = Thomas_fermi2D(c0,X,Y,TF_radius,potential(X,Y));
+phi_0 = Thomas_fermi2D(c0,X,Y,TF_radius,potential(X,Y),gamma);
 phi = phi_0;
 
 fftNx = Nx -1;
@@ -23,7 +23,7 @@ evo = 200;
 n = 0;
 while (difference)
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
-    phi_up = imtime_evolve(fftphi, potential, Deltat, fftX,fftY, fftNx,fftNy, deltax,deltay,deltafx,deltafy,c0,paritx(1:fftNx,1:fftNy,:),parity(1:fftNx,1:fftNy,:),dispersion);
+    phi_up = imtime_evolve(fftphi, potential, Deltat, V0,k_scale,fftX,fftY, fftNx,fftNy, deltax,deltay,deltafx,deltafy,c0,paritx(1:fftNx,1:fftNy,:),parity(1:fftNx,1:fftNy,:),dispersion);
     if (max(abs(phi_up(:)-fftphi(:))) < Stop_crit)
         difference = 0;
     end
@@ -40,10 +40,10 @@ phi_up = zeros(Nx,Ny);
 phi_up(1:fftNx,1:fftNy) = fftphi;
 phi_up(Nx,:) = phi_up(1,:);
 phi_up(:,Ny) = phi_up(:,1);
-r1 = randn(Nx,Ny) + 1i*randn(Nx,Ny);
-r1 = r1/norm2d(r1,Nx,Ny,deltax,deltay);
-r2 = r1 - integr2d(conj(phi_up).*r1,Nx,Ny,deltax,deltay).*phi_up;
-phi_up = phi_up + 0.3*r2;
+% r1 = randn(Nx,Ny) + 1i*randn(Nx,Ny);
+% r1 = r1/norm2d(r1,Nx,Ny,deltax,deltay);
+% r2 = r1 - integr2d(conj(phi_up).*r1,Nx,Ny,deltax,deltay).*phi_up;
+% phi_up = phi_up + 0.3*r2;
 
 
 

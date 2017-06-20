@@ -1,6 +1,6 @@
-function phi_up = imtime_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,c0,paritx,parity,dispersion)
+function phi_up = imtime_evolve(phi, potential, Deltat, V0,k_scale,X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,c0,paritx,parity,dispersion)
 
-mat_pot = potential(X,Y);
+mat_pot = potential(X,Y) + V0.*sin(k_scale.*X).^2;
 mat_nonlin_pot = c0*phi.*conj(phi);
 
 diag_pot = -Deltat*(mat_pot + mat_nonlin_pot);
