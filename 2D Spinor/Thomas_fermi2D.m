@@ -6,6 +6,6 @@ phi_0 = real(sqrt(((Beta/pi)^(1/2) - potential)/Beta)); % Computing the Thomas-F
 cutX = abs(X) < TF_radius;
 cutY = abs(Y) < TF_radius/gamma;
 cutXY = cutY.*cutX;
-phi_0 = phi_0.*cutXY;
+phi_0 = phi_0.*cutXY.*sqrt(gamma);
 
 end
