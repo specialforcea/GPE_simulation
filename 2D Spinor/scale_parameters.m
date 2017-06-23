@@ -1,8 +1,8 @@
 Rb_Mass = 1.42*10^-25;% mass of Rb87 in Kg
 hbar = 1.05*10^-34;
-N = 1e5;%atom number
+N = 2e5;%atom number
 Dip_freq = 2*pi*65;%x dipole trap frequency in Hz
-gamma = 1.69;%y freq over x freq
+gamma = 0.62;%y freq over x freq
 a_0 = sqrt(hbar/Rb_Mass/Dip_freq); %characteristic length of wavefunction in dipole trap
 raman_wavelength = 790*10^-9; % raman beam wave length
 k = 2*pi/raman_wavelength; %raman beam wave vector
