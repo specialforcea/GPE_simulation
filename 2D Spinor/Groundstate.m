@@ -1,5 +1,5 @@
 Deltat = 1e-9;
-Stop_crit = 6e-10;
+Stop_crit = 4e-10;
 
 
 
