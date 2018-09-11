@@ -1,12 +1,9 @@
-function phi_2 = dynamic(phi,t_evo,Deltat,c0,c2,Nx,V,k_scale,f,deltax,deltaf,L,Omega)
+function phi_2= dynamic(phi,t_evo,Deltat,c0,c2,Nx,speckle,k_scale,f,deltax,deltaf,L,Omega,xmin,xmax)
 
  
 Stop_time = t_evo;
 
 
-TF_radius = (3*c0/2)^(1/3);
-xmin = -TF_radius;
-xmax = TF_radius;
 
 
 
@@ -14,7 +11,8 @@ xmax = TF_radius;
 
 
 
-potential = @(x)(1/2*x.^2);
+
+potential = @(x)(0*x.^2) + speckle;
 %order = 2;
 
 X = linspace(xmin,xmax,Nx);
@@ -31,8 +29,10 @@ fftX = X(1:fftNx);
 Deltat = 1i*Deltat;
 evo = 500;
 n = 0;
-draw = 0;
-
+draw = 1;
+width_0 = zeros(1,500);
+T = zeros(1,500);
+m=1;
 while (t < Stop_time)
     %fftphi = strang_evolve(fftphi, potential,Deltat,fftX,Beta,fftNx,deltax,deltaf,fftL);
     fftphi = time_evolve(fftphi, potential,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0,c2,Omega,k_scale);
@@ -42,15 +42,24 @@ while (t < Stop_time)
    %chem_potential(n) = chem;
     
     if (mod(n,evo)==0 && draw == 1)
-        fphi = fourier_transform(fftphi,fftNx,deltax);
-        %fphi = fphi./norm1d(fphi,Nx,DeltaX);
-        b = fphi.*conj(fphi);
+        width_0(m) = integr(fftX.^2.*sq(fftphi(1,:)),fftNx,deltax);
+        T(m) = m*-i*Deltat;
+        m = m + 1;
+        %fftft = fourier_transform(fftphi,fftNx,deltax);
+        %integr(fftf.^2.*sq(fftft(1,:)),fftNx,deltaf)
+        %plot(fftf,sq(fftft))
+        plot(fftX,sq(fftphi))
+        %chem_pot(fftphi(1,:),fftX,fftNx,c0,k_scale,deltax,deltaf,0,fftL)
         
-        kin = ave_kin(fftphi,fftNx,deltax,deltaf,fftL);
-        kin2 = ave_kin2(fftphi,fftNx,deltax,deltaf,fftL);
-        pot = ave_pot(fftphi,fftNx,deltax,fftX,V,k_scale,Beta);
-        plot(fftf,b);
-        title(strcat(num2str(chem),'||',num2str(kin),'||',num2str(pot),'||',num2str(kin2)));
+%         fphi = fourier_transform(fftphi,fftNx,deltax);
+%         %fphi = fphi./norm1d(fphi,Nx,DeltaX);
+%         b = fphi.*conj(fphi);
+%         
+        %kin = ave_kin(fftphi,fftNx,deltax,deltaf,fftL)
+        %kin2 = ave_kin2(fftphi,fftNx,deltax,deltaf,fftL)
+         %pot = ave_pot(fftphi,fftNx,deltax,fftX,0,k_scale,c0);
+%         plot(fftf,b);
+%         title(strcat(num2str(chem),'||',num2str(kin),'||',num2str(pot),'||',num2str(kin2)));
         drawnow;
         
     end
@@ -59,5 +68,7 @@ end
 phi_2 = zeros(3,Nx);
 phi_2(:,1:fftNx) = fftphi;
 phi_2(:,Nx) = phi_2(:,1);
+save('width_05.mat','width_0');
+save('T05.mat','T');
 %phi_2 = fftphi;
 end

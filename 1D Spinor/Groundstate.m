@@ -29,7 +29,7 @@ while (diff)
     
 end
 
-phi_0 = phi;
+phi_0 = [init_spin(1).*phi;init_spin(2).*phi;init_spin(3).*phi];
 
 
 
