@@ -1,0 +1,12 @@
+
+speckle = zeros(49,100,Nx);
+for i=1:49
+    filepath = strcat('speckle bench test data/',str(i),'.png');
+    
+    image = imread(filepath);
+    image = double(image(:,1:Ns));
+    speckle = image(i,:);
+    speckle = speckle./integr(speckle,Ns,deltas);
+    fs = fourier_transform(speckle,Ns,deltas);
+    
+    

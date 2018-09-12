@@ -1,0 +1,35 @@
+xcor_len = zeros(1,49);
+ycor_len = zeros(1,49);
+for i=17:49
+    filepath = strcat('speckle bench test data/',num2str(i),'.png');
+    image = imread(filepath);
+    image = double(image);
+    
+    [xcor,ycor] = correlation_length_of_2d_image(image);
+    [~,nx] = size(xcor);
+    [~,ny] = size(ycor);
+    
+    x = (1:1:100).*4.8;
+    y = (1:1:100).*4.8;
+    
+    xcor_len(1,i) = find(xcor<=0.05,1)*4.8;
+    ycor_len(1,i) = find(ycor<=0.05,1)*4.8;
+    
+    
+    plot(x,xcor(1:100));
+    ti = strcat('x correlation for image ',num2str(i));
+    title(ti);
+    xlabel('delta_x/um');
+    ylabel('correlation')
+    saveas(gcf,ti)
+    
+    
+    
+    plot(y,ycor(1:100));
+    ti = strcat('y correlation for image ',num2str(i));
+    title(ti);
+    xlabel('delta_y/um');
+    ylabel('correlation')
+    saveas(gcf,ti)
+    
+end

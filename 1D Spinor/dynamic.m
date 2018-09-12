@@ -68,7 +68,7 @@ end
 phi_2 = zeros(3,Nx);
 phi_2(:,1:fftNx) = fftphi;
 phi_2(:,Nx) = phi_2(:,1);
-save('width_05.mat','width_0');
-save('T05.mat','T');
+save('width_0.mat','width_0');
+save('T0.mat','T');
 %phi_2 = fftphi;
 end
