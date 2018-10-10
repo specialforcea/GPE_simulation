@@ -1,7 +1,7 @@
-xcor_len = zeros(1,49);
-ycor_len = zeros(1,49);
-for i=1:49
-    filepath = strcat('speckle bench test data/',num2str(i),'.png');
+xcor_len = zeros(1,4);
+ycor_len = zeros(1,4);
+for i=1:4
+    filepath = strcat('speckle bench test data/9/',num2str(i),'.png');
     image = imread(filepath);
     image = double(image);
     
@@ -12,14 +12,14 @@ for i=1:49
     x = (1:1:100).*4.8;
     y = (1:1:100).*4.8;
     
-    l = find(xcor<=0.05,1)*4.8;
+    l = find(xcor<=0.135,1)*4.8;
     if isempty(l)
         xcor_len(1,i) = 0;
     else
         xcor_len(1,i) = l;
     end
     
-    l = find(ycor<=0.05,1)*4.8;
+    l = find(ycor<=0.135,1)*4.8;
     if isempty(l)
         ycor_len(1,i) = 0;
     else
@@ -32,7 +32,7 @@ for i=1:49
     title(ti);
     xlabel('delta_x/um');
     ylabel('correlation')
-    saveas(gcf,ti)
+    saveas(gcf,strcat('correlation images/9/',ti))
     
     
     
@@ -41,6 +41,6 @@ for i=1:49
     title(ti);
     xlabel('delta_y/um');
     ylabel('correlation')
-    saveas(gcf,ti)
+    saveas(gcf,strcat('correlation images/9/',ti))
     
 end

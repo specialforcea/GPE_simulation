@@ -18,12 +18,12 @@ k_scale = k*a_0;%dimensionless k in the probelm
 order = 3;%number of diffracted orders considered.
 %Beta = 3000; dimensionless interaction.
 TF_radius = (3*c0/2)^(1/3);
-xmin = -80*TF_radius;
-xmax = 80*TF_radius;
+xmin = -20*TF_radius;
+xmax = 20*TF_radius;
 
 L = xmax-xmin;
-Nx = 2^15+1; %number of grids.
-Ns = 1280-1;
+Nx = 2^13+1; %number of grids.
+Ns = 1280;
 
 deltas = 4.8e-6/a_0;
 smin = -(Ns-1)/2*deltas;

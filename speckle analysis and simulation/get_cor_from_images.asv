@@ -1,35 +1,46 @@
-xcor_len = zeros(1,49);
-ycor_len = zeros(1,49);
-for i=17:49
-    filepath = strcat('speckle bench test data/',num2str(i),'.png');
+xcor_len = zeros(1,4);
+ycor_len = zeros(1,4);
+for i=1:4
+    filepath = strcat('speckle bench test data/paco/',num2str(i),'.bmp');
     image = imread(filepath);
     image = double(image);
     
-    [xcor,ycor] = correlation_length_of_2d_image(image);
+    [xcor,ycor] = correlation_length_of_2d_image(image(200:900,200:1000));
     [~,nx] = size(xcor);
     [~,ny] = size(ycor);
     
-    x = (1:1:100).*4.8;
-    y = (1:1:100).*4.8;
+    x = (1:1:100).*5.5;
+    y = (1:1:100).*5.5;
     
-    xcor_len(1,i) = find(xcor<=0.05,1)*4.8;
-    ycor_len(1,i) = find(ycor<=0.05,1)*4.8;
+    l = find(xcor<=0.135,1)*5.5;
+    if isempty(l)
+        xcor_len(1,i) = 0;
+    else
+        xcor_len(1,i) = l;
+    end
     
+    l = find(ycor<=0.05,1)*5.5;
+    if isempty(l)
+        ycor_len(1,i) = 0;
+    else
+        ycor_len(1,i) = l;
+    end
+ 
     
     plot(x,xcor(1:100));
-    ti = strcat('x correlation for image ',num2str(i));
+    ti = strcat('x correlation for image ',num2str(i),'.png');
     title(ti);
     xlabel('delta_x/um');
     ylabel('correlation')
-    saveas(gcf,ti)
+    saveas(gcf,strcat('correlation images/paco/',ti))
     
     
     
     plot(y,ycor(1:100));
-    ti = strcat('y correlation for image ',num2str(i));
+    ti = strcat('y correlation for image ',num2str(i),'.png');
     title(ti);
     xlabel('delta_y/um');
     ylabel('correlation')
-    saveas(gcf,ti)
+    saveas(gcf,strcat('correlation images/paco/',ti))
     
 end
