@@ -1,14 +1,14 @@
 function V_average = characterize_intensity(image,dark)
-im = image-dark;
+im = image-0;
 im = double(im-min(min(im)));
 
 V_average = mean(mean(im));
-max_im = max(max(im));
-x = (0:1:max_im)/V_average/0.30;
+max_im = floor((max(max(im))));
+x = (0:1:max_im)/V_average;
 y = zeros(1,max_im+1);
-for i=1:1024
-for j=1:1280
-y(im(i,j) + 1) = y(im(i,j)+1) + 1;
+for i=1:2^11
+for j=1:2^11
+y(floor(im(i,j)) + 1) = y(floor(im(i,j))+1) + 1;
 end
 end
 y = y/sum(y);

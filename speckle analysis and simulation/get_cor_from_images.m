@@ -1,25 +1,29 @@
-xcor_len = zeros(1,4);
-ycor_len = zeros(1,4);
-for i=1:4
-    filepath = strcat('speckle bench test data/9/',num2str(i),'.png');
-    image = imread(filepath);
-    image = double(image);
+xcor_len = zeros(1,5);
+ycor_len = zeros(1,5);
+for i=5:9
+%     filepath = strcat('speckle bench test data/numerical/',num2str(i),'.png');
+%     image = imread(filepath);
+inten = sq(fftshift(fft2(exp(-2*pi*1i*rand(2^i)),2^9,2^9)));
+imagesc(inten)
+colorbar
+saveas(gcf,strcat('speckle bench test data/numerical/',num2str(i),'.png'));
+    image = double(inten);
     
     [xcor,ycor] = correlation_length_of_2d_image(image);
     [~,nx] = size(xcor);
     [~,ny] = size(ycor);
     
-    x = (1:1:100).*4.8;
-    y = (1:1:100).*4.8;
+    x = (1:1:100).*1;
+    y = (1:1:100).*1;
     
-    l = find(xcor<=0.135,1)*4.8;
+    l = find(xcor<=0.135,1)*1;
     if isempty(l)
         xcor_len(1,i) = 0;
     else
         xcor_len(1,i) = l;
     end
     
-    l = find(ycor<=0.135,1)*4.8;
+    l = find(ycor<=0.135,1)*1;
     if isempty(l)
         ycor_len(1,i) = 0;
     else
@@ -32,7 +36,7 @@ for i=1:4
     title(ti);
     xlabel('delta_x/um');
     ylabel('correlation')
-    saveas(gcf,strcat('correlation images/9/',ti))
+    saveas(gcf,strcat('correlation images/numerical/',ti))
     
     
     
@@ -41,6 +45,6 @@ for i=1:4
     title(ti);
     xlabel('delta_y/um');
     ylabel('correlation')
-    saveas(gcf,strcat('correlation images/9/',ti))
+    saveas(gcf,strcat('correlation images/numerical/',ti))
     
 end

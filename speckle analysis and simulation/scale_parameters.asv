@@ -1,6 +1,6 @@
 Rb_Mass = 1.42*10^-25;% mass of Rb87 in Kg
 hbar = 1.05*10^-34;
-k_b = 1.38*10^-23;
+k_b = 1.38*23;
 N = 2e5;%atom number
 Dip_freq = 2*pi*70;%dipole trap frequency in Hz
 a_0 = sqrt(hbar/Rb_Mass/Dip_freq); %characteristic length of wavefunction in dipole trap

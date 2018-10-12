@@ -1,5 +1,5 @@
-Deltat = 1e-9;
-Stop_crit = 1e-9;
+Deltat = 1e-10;
+Stop_crit = 1e-8;
 
 
 
@@ -13,16 +13,15 @@ diff = 1;
 evo = 200;
 n = 0;
 
-
+fftNx = Nx -1;
+fftphi = phi(1:fftNx);
+fftX = X(1:fftNx);
+fftL = L - deltax;
+fftf = f(1:fftNx);
 
 
 
 while (diff)
-    fftNx = Nx -1;
-    fftphi = phi(1:fftNx);
-    fftX = X(1:fftNx);
-    fftL = L - deltax;
-    fftf = f(1:fftNx);
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
     phi_up = time_evolve_ground(fftphi, potential,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0);
     difference = max(abs(phi_up-fftphi))
@@ -36,13 +35,12 @@ while (diff)
 %     end
     fftphi = phi_up;
     n = n + 1;
-    phi(1:fftNx) = fftphi;
-    phi(Nx) = phi(1);
     
 end
 
-
-
+phi_2 = zeros(3,Nx);
+phi_2(:,1:fftNx) = fftphi;
+phi_2(:,Nx) = phi_2(:,1);
 phi_0 = [init_spin(1).*phi;init_spin(2).*phi;init_spin(3).*phi];
 
 
