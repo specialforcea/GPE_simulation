@@ -1,5 +1,5 @@
 Deltat = 1e-9;
-Stop_crit = 1e-9;
+Stop_crit = 1.7e-9;
 
 
 
@@ -18,14 +18,10 @@ n = 0;
 
 
 while (diff)
-    fftNx = Nx -1;
-    fftphi = phi(1:fftNx);
-    fftX = X(1:fftNx);
-    fftL = L - deltax;
-    fftf = f(1:fftNx);
+   
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
-    phi_up = time_evolve_ground(fftphi, potential,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0);
-    difference = max(abs(phi_up-fftphi))
+    phi_up = time_evolve_ground(phi, potential,Deltat,X,Nx,deltax,deltaf,L,c0);
+    difference = max(abs(phi_up-phi))
     if (difference < Stop_crit)
         diff = 0;
     end
@@ -34,10 +30,9 @@ while (diff)
 %         max(abs(phi_up-phi))
 %         chem_pot(phi,X,Nx,c0,k_scale,deltax,deltaf,V,L)
 %     end
-    fftphi = phi_up;
+    phi = phi_up;
     n = n + 1;
-    phi(1:fftNx) = fftphi;
-    phi(Nx) = phi(1);
+    
     
 end
 

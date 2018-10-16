@@ -1,12 +1,13 @@
 xcor_len = zeros(1,5);
 ycor_len = zeros(1,5);
-for i=5:9
+for i=12:13
 %     filepath = strcat('speckle bench test data/numerical/',num2str(i),'.png');
 %     image = imread(filepath);
-inten = sq(fftshift(fft2(exp(-2*pi*1i*rand(2^i)),2^9,2^9)));
+inten = sq(fftshift(fft2(exp(-2*pi*1i*rand(2^i)),2^7,2^14+1)));
 imagesc(inten)
 colorbar
-saveas(gcf,strcat('speckle bench test data/numerical/',num2str(i),'.png'));
+saveas(gcf,strcat('speckle bench test data/T_simu/',num2str(i),'.png'));
+save(strcat('speckle bench test data\T_simu\inten_', num2str(i),'.mat'), 'inten')
     image = double(inten);
     
     [xcor,ycor] = correlation_length_of_2d_image(image);
@@ -34,9 +35,9 @@ saveas(gcf,strcat('speckle bench test data/numerical/',num2str(i),'.png'));
     plot(x,xcor(1:100));
     ti = strcat('x correlation for image ',num2str(i),'.png');
     title(ti);
-    xlabel('delta_x/um');
+    xlabel('delta_x/pixel');
     ylabel('correlation')
-    saveas(gcf,strcat('correlation images/numerical/',ti))
+    saveas(gcf,strcat('correlation images/T_simu/',ti))
     
     
     
@@ -45,6 +46,6 @@ saveas(gcf,strcat('speckle bench test data/numerical/',num2str(i),'.png'));
     title(ti);
     xlabel('delta_y/um');
     ylabel('correlation')
-    saveas(gcf,strcat('correlation images/numerical/',ti))
+    saveas(gcf,strcat('correlation images/T_simu/',ti))
     
 end

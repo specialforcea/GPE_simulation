@@ -1,2 +1,0 @@
-init_phi = sqrt(gaussian(X,0,0.04);%500nK
-phi_2 = dynamic(phi,13.0,Deltat,c0,c2,Nx,speckle,k_scale,f,deltax,deltaf,L,Omega,xmin,xmax)
