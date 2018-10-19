@@ -10,6 +10,8 @@ init_spin = [1 0 0];
 phi_0 = Thomas_fermi1D(c0,X,TF_radius,potential(X),Nx,deltax);
 phi = phi_0;
 diff = 1;
+
+%show difference every evo of evolutions
 evo = 200;
 n = 0;
 
