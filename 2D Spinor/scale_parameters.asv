@@ -36,15 +36,13 @@ unity = ones(Nx,1);
 X = unity * linspace(xmin,xmax,Nx);% x space
 Y = linspace(ymin,ymax,Ny)' * unity';% x space
 
-fx = ((0:1:Nx-1)-(Nx-1)/2).*deltafx;% X momentum space
-fy = ((0:1:Ny-1)-(Ny-1)/2).*deltafy;% Y momentum space
+f = ((0:1:Nx-1)-(Nx-1)/2).*deltaf;% momentum space% X momentum space
+fy = (0:1:Ny-1)-(Ny-1)/2;% X momentum space
 k_spacing = k_scale*(xmax-xmin)/pi;%2*k_scale in f space. 
 lattice_pot = E_r/4/4;
-V = lattice_pot/quanta;
+V0 = lattice_pot/quanta;
 real_Omega = 20000;%Raman coupling in Hz
 Omega = real_Omega/Dip_freq;%rescaled coupling strength
 [paritx,parity] = fourier_parity(Nx,Ny);
 dispersion = fourier_dispersion(Nx,Ny,Lx,Ly);
 detuning = E_r/(hbar*Dip_freq);%recoil energy is defined with 2k_l
-trap = 1;
-
