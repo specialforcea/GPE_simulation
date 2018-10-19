@@ -17,21 +17,21 @@ E_r = (hbar)^2*(2*k)^2/(2*Rb_Mass);%recoil energy
 quanta = hbar*Dip_freq;
 k_scale = k*a_0;%dimensionless k in the probelm
 order = 3;%number of diffracted orders considered.
-TF_radius = (3*c0/2)^(1/3);
+TF_radius = (3*c0/2)^(1/3);%Thomas Fermi radius
 xmin = -2*TF_radius;
-xmax = 2*TF_radius;
+xmax = 2*TF_radius;%spatial scale
 
 L = xmax-xmin;
 Nx = 2^13+1; %number of grids.
 
 deltax = (xmax-xmin)/(Nx-1);
-deltaf = 1/Nx/deltax;
+deltaf = 1/Nx/deltax;%momentum spacing
 
 X = linspace(xmin,xmax,Nx);% x space
 
 f = ((0:1:Nx-1)-(Nx-1)/2).*deltaf;% momentum space
 
 k_spacing = k_scale/pi;%2*k_scale in f space. 
-lattice_pot = 30*E_r;
+lattice_pot = 30*E_r;%lattice potential in unit of recoil energy
 V = lattice_pot/quanta;
 trap = 1;%harmonic trap is on in dynamic.m
