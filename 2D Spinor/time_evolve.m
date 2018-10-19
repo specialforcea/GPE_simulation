@@ -1,4 +1,4 @@
-function phi_up = time_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,L,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning)
+function phi_up = time_evolve(phi, potential, Deltat, X,Y, Nx,Ny, deltax,deltay,deltafx,deltafy,c0,c2,Omega,k_scale,paritx,parity,dispersion,detuning)
 
 density = sq(phi);
 
@@ -21,11 +21,11 @@ phi_up = exp_pot.*phi;
 
 %phi_up = phi;
 
-fourier_phi = fourier_transform2(phi_up,paritx,parity,deltax,deltay);
+fourier_phi = fourier_transform2(phi_up,deltax,deltay);
 
 fourier_phi_evo = exp(dispersion.*Deltat).*fourier_phi;
 
-phi_up = inverse_ft2(fourier_phi_evo,paritx,parity,deltafx,deltafy,Nx,Ny);
+phi_up = inverse_ft2(fourier_phi_evo,deltafx,deltafy,Nx,Ny);
 
 phi_up = phi_up/norm2d(phi_up, Nx,Ny, deltax,deltay);
 
