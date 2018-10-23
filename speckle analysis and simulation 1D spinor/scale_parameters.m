@@ -41,5 +41,5 @@ Raman_beams_angle = 10;%deg
 k_spacing = k_scale*sin(Raman_beams_angle/2/180*pi)/pi;%2*k_scale in f space. 
 lattice_pot = 30*E_r;
 V = lattice_pot/quanta;
-real_Omega = 0;%Raman coupling in Hz
+real_Omega = 20000;%Raman coupling in Hz
 Omega = real_Omega/Dip_freq;%rescaled coupling strength
