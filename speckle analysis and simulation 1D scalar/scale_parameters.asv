@@ -19,7 +19,7 @@ k_scale = k*a_0;%dimensionless k in the probelm
 Raman_beams_angle = 10;%deg
 k_R = 2*k_scale*sin(Raman_beams_angle/2/180*pi);
 
-E_r = (hbar)^2*(k_R/a_0)^2/(2*Rb_Mass);%recoil energy
+E_r = (hbar)^2*(2*k)^2/(2*Rb_Mass);%recoil energy
 order = 3;%number of diffracted orders considered.
 %Beta = 3000; dimensionless interaction.
 TF_radius = (3*c0/2)^(1/3);

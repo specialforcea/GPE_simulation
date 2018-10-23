@@ -1,0 +1,10 @@
+
+fspeckle = zeros(5,Nx);
+for i=5:12
+    speckle = load(strcat('speckle bench test data/T_simu/inten_',num2str(i),'.mat'));
+    speckle = speckle.inten/1e5;
+    speckle = speckle - mean(speckle,2);
+    
+    
+    
+    
