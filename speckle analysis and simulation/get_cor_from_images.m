@@ -1,16 +1,19 @@
-xcor_len = zeros(1,5);
-ycor_len = zeros(1,5);
-for i=12:13
-%     filepath = strcat('speckle bench test data/numerical/',num2str(i),'.png');
+xcor_len = zeros(1,13);
+ycor_len = zeros(1,13);
+for i=5:13
+    filepath = strcat('speckle bench test data/T_simu/inten_',num2str(i),'.mat');
 %     image = imread(filepath);
-inten = sq(fftshift(fft2(exp(-2*pi*1i*rand(2^i)),2^7,2^14+1)));
-imagesc(inten)
-colorbar
-saveas(gcf,strcat('speckle bench test data/T_simu/',num2str(i),'.png'));
-save(strcat('speckle bench test data\T_simu\inten_', num2str(i),'.mat'), 'inten')
-    image = double(inten);
+    speckle = load(filepath);
+    speckle = speckle.inten;
+    speckle = speckle/1e5;
+% inten = sq(fftshift(fft2(exp(-2*pi*1i*rand(2^i)),2^7,2^14+1)));
+% imagesc(inten)
+% colorbar
+% saveas(gcf,strcat('speckle bench test data/T_simu/',num2str(i),'.png'));
+% save(strcat('speckle bench test data\T_simu\inten_', num2str(i),'.mat'), 'inten')
+    %image = double(inten);
     
-    [xcor,ycor] = correlation_length_of_2d_image(image);
+    [xcor,ycor] = correlation_length_of_2d_image(speckle);
     [~,nx] = size(xcor);
     [~,ny] = size(ycor);
     
@@ -31,21 +34,23 @@ save(strcat('speckle bench test data\T_simu\inten_', num2str(i),'.mat'), 'inten'
         ycor_len(1,i) = l;
     end
  
+    save('xcor_len.mat','xcor_len')
+    save('ycor_len.mat','ycor_len')
     
-    plot(x,xcor(1:100));
-    ti = strcat('x correlation for image ',num2str(i),'.png');
-    title(ti);
-    xlabel('delta_x/pixel');
-    ylabel('correlation')
-    saveas(gcf,strcat('correlation images/T_simu/',ti))
-    
-    
-    
-    plot(y,ycor(1:100));
-    ti = strcat('y correlation for image ',num2str(i),'.png');
-    title(ti);
-    xlabel('delta_y/um');
-    ylabel('correlation')
-    saveas(gcf,strcat('correlation images/T_simu/',ti))
+%     plot(x,xcor(1:100));
+%     ti = strcat('x correlation for image ',num2str(i),'.png');
+%     title(ti);
+%     xlabel('delta_x/pixel');
+%     ylabel('correlation')
+%     saveas(gcf,strcat('correlation images/T_simu/',ti))
+%     
+%     
+%     
+%     plot(y,ycor(1:100));
+%     ti = strcat('y correlation for image ',num2str(i),'.png');
+%     title(ti);
+%     xlabel('delta_y/um');
+%     ylabel('correlation')
+%     saveas(gcf,strcat('correlation images/T_simu/',ti))
     
 end
