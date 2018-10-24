@@ -13,9 +13,13 @@ pre_c0 = 4*pi*hbar^2*(a_s0 + 2*a_s2)/(3*Rb_Mass);%real c0
 pre_c2 = 4*pi*hbar^2*(a_s2 - a_s0)/(3*Rb_Mass);%real c2
 c0 = pre_c0*N/(hbar*Dip_freq*a_0^3);
 c2 = pre_c2*N/(hbar*Dip_freq*a_0^3);
-E_r = (hbar)^2*(2*k)^2/(2*Rb_Mass);%recoil energy
+
 quanta = hbar*Dip_freq;
 k_scale = k*a_0;%dimensionless k in the probelm
+Raman_beams_angle = 10;%deg
+k_R = 2*k_scale*sin(Raman_beams_angle/2/180*pi);
+
+E_r = (hbar)^2*(k_R/a_0)^2/(2*Rb_Mass);%recoil energy
 order = 3;%number of diffracted orders considered.
 %Beta = 3000; dimensionless interaction.
 TF_radius = (3*c0/2)^(1/3);
@@ -38,8 +42,9 @@ S = linspace(smin,smax,Ns);
 f = ((0:1:Nx-1)-(Nx-1)/2).*deltaf;% momentum space
 sf = ((0:1:Ns-1)-(Ns-1)/2).*deltasf;
 Raman_beams_angle = 10;%deg
-k_spacing = k_scale*sin(Raman_beams_angle/2/180*pi)/pi;%2*k_scale in f space. 
+k_spacing = k_R/2/pi;%2*k_scale in f space. 
 lattice_pot = 30*E_r;
 V = lattice_pot/quanta;
 real_Omega = 20000;%Raman coupling in Hz
 Omega = real_Omega/Dip_freq;%rescaled coupling strength
+detuning = E_r/(hbar*Dip_freq);%recoil energy is defined with 2k_l
