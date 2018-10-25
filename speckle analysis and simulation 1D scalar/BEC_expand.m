@@ -11,7 +11,7 @@ for i=1:300
 
     mom_evo(1,i) = sqrt(integr(f.^2.*fp,Nx,deltaf));
 
-            plot(f(1,7500:9000)./k_spacing,fp(1,7500:9000))
+            plot(f(1,3500:4500)./k_spacing,fp(1,3500:4500))
             drawnow
 
     phi = phi_1;

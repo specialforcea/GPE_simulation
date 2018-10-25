@@ -2,8 +2,8 @@ phi1 = load('simulation_results/10242018evolve_with_soc/phi_less1_kR.mat');
 phi1 = phi1.phi_less1_kR;
 phi2 = load('simulation_results/10242018evolve_with_soc/phi_3kR.mat');
 phi2 = phi2.phi_3kR;
-phi3 = load('simulation_results/10242018evolve_with_soc/phi_4to5_kR.mat');
-phi3 = phi3.phi_4to5_kR;
+phi3 = load('simulation_results/10242018evolve_with_soc/phi_4to5_kR_8193.mat');
+phi3 = phi3.phi_4to5_kR_8193;
 phi4 = load('simulation_results/10242018evolve_with_soc/phi_8_kR.mat');
 phi4 = phi4.phi_8_kR;
 
@@ -22,7 +22,7 @@ for o=1:5
 
     for j=1:20
         phi = phi3;
-        speckle_row = speckle(3*j,:);
+        speckle_row = speckle(3*j,300:Nx+300);
         for i=1:200
             phi_1 = dynamic(phi,1e-3,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,Omega(o),xmin,xmax,k_R,detuning);
 
@@ -47,3 +47,6 @@ for o=1:5
         final_phi(o,j,:,:) = reshape(phi,[1,1,3,Nx]);
     end
 end
+
+save('simulation_results/10242018evolve_with_soc/mom_evo.mat','mom_evo');
+save('simulation_results/10242018evolve_with_soc/final_phi.mat','final_phi');
