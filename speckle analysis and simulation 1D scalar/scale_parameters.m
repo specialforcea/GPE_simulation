@@ -23,11 +23,11 @@ E_r = (hbar)^2*(k_R/a_0)^2/(2*Rb_Mass);%recoil energy
 order = 3;%number of diffracted orders considered.
 %Beta = 3000; dimensionless interaction.
 TF_radius = (3*c0/2)^(1/3);
-xmin = -2*TF_radius;
-xmax = 2*TF_radius;
+xmin = -4*TF_radius;
+xmax = 4*TF_radius;
 
 L = xmax-xmin;
-Nx = 2^13+1; %number of grids.
+Nx = 2^14+1; %number of grids.
 Ns = 1280;
 
 deltas = 4.8e-6/a_0;

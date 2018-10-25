@@ -5,17 +5,17 @@ speckle = speckle./1e5;%average intensity about 5 in simulation units
 
 
 
-fac = [1,5,10,20,40];
+fac = [10,20,40];
 
-mom_evo = zeros(5,20,300);
-prof_evo = zeros(5,20,300);
-final_phi = zeros(5,20,Nx);
+mom_evo = zeros(3,20,300);
+prof_evo = zeros(3,20,300);
+final_phi = zeros(3,20,Nx);
 
 phi = phi_0;
-for o = 1:5
+for o = 1:3
     speckle1 = speckle*fac(o);
     for j=1:20
-        speckle_row = speckle1(3*j,300:Nx+300);
+        speckle_row = speckle1(3*j,:);
         %speckle_row = speckle_row -mean(speckle_row);
         phi = phi_0;
         
@@ -29,7 +29,7 @@ for o = 1:5
             mom_evo(1,j,i) = sqrt(integr(f.^2.*fp,Nx,deltaf));
             prof_evo(1,j,i) = sqrt(integr(X.^2.*sq(phi_1(1,:)),Nx,deltax));
 
-                    plot(f(1,3500:4500)./k_spacing,fp(1,3500:4500))
+                    %plot(f(1,3500:4500)./k_spacing,fp(1,3500:4500))
                     
 
             phi = phi_1;
