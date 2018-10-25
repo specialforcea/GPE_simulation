@@ -27,7 +27,7 @@ xmin = -4*TF_radius;
 xmax = 4*TF_radius;
 
 L = xmax-xmin;
-Nx = 2^14+1; %number of grids.
+Nx = 2^13+1; %number of grids.
 Ns = 1280;
 
 deltas = 4.8e-6/a_0;
