@@ -67,6 +67,20 @@ eigens(3,:) = sqrt(sq(CA) + sq(CC));
 for i = 1:Nx
     phi_up(:,i) = MatV(:,:,i)*(exp(-eigens(:,i).*Deltat).*(MatB(:,:,i)*phi_up(:,i)));
 end
+
+temp = zeros(3,Nx);
+
+for i=1:3
+	temp(i,:) = sum(Reshape(MatB(i,:,:),[3,Nx]).*phi_up).*exp(-eigens(i,:).*Deltat)
+end
+
+for i=1:3
+	phi_up(i,:) = sum(Reshape(MatV(i,:,:),[3,Nx]).*temp)
+end
+
+
+
+
 phi_up = phi_up/norm1d(phi_up, Nx, deltax);
 
 end
