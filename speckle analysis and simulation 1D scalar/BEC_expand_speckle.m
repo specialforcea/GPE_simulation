@@ -39,9 +39,9 @@ for o = 1:3
 
         end
         final_phi_10(o,j,:) = reshape(phi(1,:),[1,1,Nx]);
-        save('simulation_results/10252018BEC_expand_speckle/mom_evo_10.mat','mom_evo_10')
-        save('simulation_results/10252018BEC_expand_speckle/prof_evo_10.mat','prof_evo_10')
-        save('simulation_results/10252018BEC_expand_speckle/final_phi_10.mat','final_phi_10')
+        save('simulation_results/10262018BEC_expand_speckle/mom_evo_10.mat','mom_evo_10')
+        save('simulation_results/10262018BEC_expand_speckle/prof_evo_10.mat','prof_evo_10')
+        save('simulation_results/10262018BEC_expand_speckle/final_phi_10.mat','final_phi_10')
     end
 end
 
@@ -76,8 +76,8 @@ for o = 1:3
 
         end
         final_phi_12(o,j,:) = reshape(phi(1,:),[1,1,Nx]);
-        save('simulation_results/10252018BEC_expand_speckle/mom_evo_12.mat','mom_evo_12')
-        save('simulation_results/10252018BEC_expand_speckle/prof_evo_12.mat','prof_evo_12')
-        save('simulation_results/10252018BEC_expand_speckle/final_phi_12.mat','final_phi_12')
+        save('simulation_results/10262018BEC_expand_speckle/mom_evo_12.mat','mom_evo_12')
+        save('simulation_results/10262018BEC_expand_speckle/prof_evo_12.mat','prof_evo_12')
+        save('simulation_results/10262018BEC_expand_speckle/final_phi_12.mat','final_phi_12')
     end
 end
