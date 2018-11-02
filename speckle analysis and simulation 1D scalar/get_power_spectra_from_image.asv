@@ -1,0 +1,16 @@
+li=[20,25,30];
+fspeckle = zeros(3,Ns);
+for i=1:3
+    speckle = imread(strcat('speckle bench test data/12/',num2str(li(i)),'mm.png'));
+    
+    speckle = speckle - repmat(mean(speckle,2),1,Ns);
+    
+    fsp = fourier_transform(speckle',Ns,deltas)';
+    sq_fsp = sq(fsp);
+    fsp = abs(fsp);
+    fsp = mean(fsp);
+    fspeckle(i-7,:) = fsp;
+end
+    
+    
+    
