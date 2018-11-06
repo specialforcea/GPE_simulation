@@ -5,13 +5,12 @@ for i=1:3
     speckle = double(speckle);
     speckle = speckle - repmat(mean(speckle,2),1,Ns);
     
-    %fsp = fourier_transform(speckle',Ns,deltas)';
-    fsp = fftshift(fft(speckle,Ns,2),2);
+    fsp = fourier_transform(speckle',Ns,deltas)';
     sq_fsp = sq(fsp);
     
+    corr_func = abs(inverse_ft(sq_fsp',Ns,deltasf)');
     
-    
-    pow = mean(sq_fsp);
+    pow = mean(corr_func);
     
     fspeckle(i,:) = pow;
 end

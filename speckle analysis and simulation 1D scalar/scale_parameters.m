@@ -36,7 +36,7 @@ smax = (Ns-1)/2*deltas;
 
 deltax = (xmax-xmin)/(Nx-1);
 deltaf = 1/Nx/deltax;
-deltasf = 1/Ns/deltax; 
+deltasf = 1/Ns/deltas; 
 X = linspace(xmin,xmax,Nx);% x space
 S = linspace(smin,smax,Ns);
 f = ((0:1:Nx-1)-(Nx-1)/2).*deltaf;% momentum space
