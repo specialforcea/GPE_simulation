@@ -30,7 +30,9 @@ L = xmax-xmin;
 Nx = 2^13+1; %number of grids.
 Ns = 1280;
 
-deltas = 4.8e-6/a_0;
+speckle_mag = 46;
+deltas = 4.8e-6/speckle_mag/a_0;
+
 smin = -(Ns-1)/2*deltas;
 smax = (Ns-1)/2*deltas;
 
