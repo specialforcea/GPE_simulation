@@ -50,8 +50,5 @@ for mk=1:3
         save('simulation_results/11192018kick_and_evolve/mom_evo.mat','mom_evo')
         save('simulation_results/11192018kick_and_evolve/prof_evo.mat','prof_evo')
         save('simulation_results/11192018kick_and_evolve/final_phi.mat','final_phi')
-        
-        save('simulation_results/11192018kick_and_evolve/mean_m.mat','mean_m')
-        save('simulation_results/11192018kick_and_evolve/mean_p.mat','mean_p')
     end
 end
