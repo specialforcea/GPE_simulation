@@ -12,7 +12,7 @@ for i=1:1100
         figure(1)
         plot(X,sq(phi))
         figure(2)
-        plot(f,sq(fftshift(fourier_transform(phi,Nx,deltax))));
+        plot(f./k_R*2*pi,sq(fourier_transform(phi,Nx,deltax)));
         drawnow;
     end
     save('simulation_results/11162018SOC_dressed_state/phi_1.mat','phi_1');
