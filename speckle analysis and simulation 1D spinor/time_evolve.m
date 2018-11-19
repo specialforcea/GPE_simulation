@@ -8,7 +8,7 @@ pot = [p;p;p];
 
 nonlin_pot = zeros(3,Nx);
 nonlin_pot(1,:) = c0.*tot_density + c2.*(density(1,:) + density(2,:) - density(3,:));
-nonlin_pot(2,:) = c0.*tot_density + c2.*(density(1,:) + density(3,:)) - detuning;
+nonlin_pot(2,:) = c0.*tot_density + c2.*(density(1,:) + density(3,:)) - 0*detuning;
 nonlin_pot(3,:) = c0.*tot_density + c2.*(density(3,:) + density(2,:) - density(1,:)) - 500*detuning;
 
 
@@ -42,8 +42,8 @@ phi_up(3,:) = inverse_ft(fourier_phi_evo(3,:),Nx,deltaf);
 
 phi_up = phi_up/norm1d(phi_up, Nx, deltax);
 
-CA = -Omega*exp(-1i*k_R*X) + c2*phi_up(2,:).*conj(phi_up(3,:));%coupling between 1 and 0
-CC = -Omega*exp(-1i*k_R*X) + c2*phi_up(1,:).*conj(phi_up(2,:));%coupling between -1 and 0
+CA = -Omega*exp(-1i*2*k_R*X) + c2*phi_up(2,:).*conj(phi_up(3,:));%coupling between 1 and 0
+CC = -Omega*exp(-1i*2*k_R*X) + c2*phi_up(1,:).*conj(phi_up(2,:));%coupling between -1 and 0
 
 MatV = -CC./((sqrt(1+sq(CC)./sq(CA))).*conj(CA));
 MatV(2,:) = zeros(1,Nx);
