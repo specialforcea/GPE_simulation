@@ -13,7 +13,7 @@ final_phi = zeros(6,10,2,Nx);
 
 
 
-for mk=5:6
+for mk=1:6
     phi_mk = phi_dress;
     phi_mk = phi_mk.*repmat(exp(-1i*k_R*mk*X),3,1);
     rand_row = randi([1 Nx],1,10);
@@ -58,10 +58,10 @@ for mk=5:6
 
         end
         final_phi(mk,j,:,:) = reshape(phi(1:2,:),[1,1,2,Nx]);
-        save('simulation_results/11202018kick_evolve_with_soc_lap/mom_evo.mat','mom_evo')
-        save('simulation_results/11202018kick_evolve_with_soc_lap/prof_evo.mat','prof_evo')
-        save('simulation_results/11202018kick_evolve_with_soc_lap/final_phi.mat','final_phi')
-        save('simulation_results/11202018kick_evolve_with_soc_lap/mean_m.mat','mean_m')
-        save('simulation_results/11202018kick_evolve_with_soc_lap/mean_p.mat','mean_p')
+        save('simulation_results/11202018kick_evolve_with_soc/mom_evo.mat','mom_evo')
+        save('simulation_results/11202018kick_evolve_with_soc/prof_evo.mat','prof_evo')
+        save('simulation_results/11202018kick_evolve_with_soc/final_phi.mat','final_phi')
+        save('simulation_results/11202018kick_evolve_with_soc/mean_m.mat','mean_m')
+        save('simulation_results/11202018kick_evolve_with_soc/mean_p.mat','mean_p')
     end
 end
