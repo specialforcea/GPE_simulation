@@ -3,27 +3,28 @@ filepath = strcat('speckle bench test data/numerical_speckle/inten_', num2str(i)
 speckle = load(filepath);
 speckle = speckle.inten;
 
-speckle = 20*speckle/1e4*3;%average intensity about 5 in simulation units
+speckle = 5*speckle/1e4*3;%average intensity about 5 in simulation units
 
-mom_evo = zeros(6,10,2,300);
-prof_evo = zeros(6,10,2,300);
-mean_m = zeros(6,10,2,300);
-mean_p = zeros(6,10,2,300);
-final_phi = zeros(6,10,2,Nx);
+mom_evo = zeros(8,20,2,200);
+prof_evo = zeros(8,20,2,200);
+mean_m = zeros(8,20,2,200);
+mean_p = zeros(8,20,2,200);
+final_phi = zeros(8,20,2,Nx);
 
 
+kicks = [0.5,1,2,3,4,5,10,20];
 
-for mk=1:6
+for mk=1:8
     phi_mk = phi_dress;
-    phi_mk = phi_mk.*repmat(exp(-1i*k_R*mk*X),3,1);
-    rand_row = randi([1 Nx],1,10);
-    for j=1:10
+    phi_mk = phi_mk.*repmat(exp(-1i*k_R*kicks(mk)*X),3,1);
+    rand_row = randi([1 Nx],1,20);
+    for j=1:20
 
         speckle_row = speckle(rand_row(j),:);
 
         phi = phi_mk;
 
-        for i=1:300
+        for i=1:200
             phi_1 = dynamic(phi,1e-2,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,2*detuning,xmin,xmax,k_R,detuning);
             
             fp1 = sq(fourier_transform(phi_1(1,:),Nx,deltax));
@@ -55,13 +56,16 @@ for mk=1:6
 
 
             phi = phi_1;
+            
+            
 
         end
+        
         final_phi(mk,j,:,:) = reshape(phi(1:2,:),[1,1,2,Nx]);
-        save('simulation_results/11202018kick_evolve_with_soc/mom_evo.mat','mom_evo')
-        save('simulation_results/11202018kick_evolve_with_soc/prof_evo.mat','prof_evo')
-        save('simulation_results/11202018kick_evolve_with_soc/final_phi.mat','final_phi')
-        save('simulation_results/11202018kick_evolve_with_soc/mean_m.mat','mean_m')
-        save('simulation_results/11202018kick_evolve_with_soc/mean_p.mat','mean_p')
+        save('simulation_results/11212018kick_evolve_with_soc/mom_evo.mat','mom_evo')
+        save('simulation_results/11212018kick_evolve_with_soc/prof_evo.mat','prof_evo')
+        save('simulation_results/11212018kick_evolve_with_soc/final_phi.mat','final_phi')
+        save('simulation_results/11212018kick_evolve_with_soc/mean_m.mat','mean_m')
+        save('simulation_results/11212018kick_evolve_with_soc/mean_p.mat','mean_p')
     end
 end
