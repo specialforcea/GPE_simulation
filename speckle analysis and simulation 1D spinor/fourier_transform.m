@@ -6,4 +6,4 @@ function y = fourier_transform(phi,Nx,deltax)
 % y = fft(phi_1).*deltax;
 % y = y.* parity;
 
-y = fftshift(fft(phi,Nx,2)).*deltax;
+y = fftshift(fft(phi,Nx,2),2).*deltax;
