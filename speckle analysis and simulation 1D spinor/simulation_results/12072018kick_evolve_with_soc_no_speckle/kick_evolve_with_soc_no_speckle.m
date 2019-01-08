@@ -5,16 +5,16 @@ speckle = speckle.inten;
 
 
 
-% mom_evo = zeros(8,2,200);
-% prof_evo = zeros(8,2,200);
-% mean_m = zeros(8,2,200);
-% mean_p = zeros(8,2,200);
-% final_phi = zeros(8,2,Nx);
+mom_evo = zeros(8,2,200);
+prof_evo = zeros(8,2,200);
+mean_m = zeros(8,2,200);
+mean_p = zeros(8,2,200);
+final_phi = zeros(8,2,Nx);
 
 
 kicks = [0.5,1,2,3,4,5,10,20];
 
-for mk=6:8
+for mk=1:8
     phi_mk = phi_dress;
     phi_mk = phi_mk.*repmat(exp(-1i*k_R*kicks(mk)*X),3,1);
     
@@ -55,15 +55,15 @@ for mk=6:8
 
         phi = phi_1;
 
-        save(strcat('simulation_results/12072018kick_evolve_with_soc_no_speckle/phi_',num2str(mk),'_',num2str(i),'.mat'),'phi_1')
+        save(strcat('C:\Experiments\simulation results\1d speckle spinor\12072018kick_evolve_with_soc_no_speckle/phi_',num2str(mk),'_',num2str(i),'.mat'),'phi_1')
 
     end
 
     final_phi(mk,:,:) = reshape(phi(1:2,:),[1,2,Nx]);
-    save('simulation_results/12072018kick_evolve_with_soc_no_speckle/mom_evo.mat','mom_evo')
-    save('simulation_results/12072018kick_evolve_with_soc_no_speckle/prof_evo.mat','prof_evo')
-    save('simulation_results/12072018kick_evolve_with_soc_no_speckle/final_phi.mat','final_phi')
-    save('simulation_results/12072018kick_evolve_with_soc_no_speckle/mean_m.mat','mean_m')
-    save('simulation_results/12072018kick_evolve_with_soc_no_speckle/mean_p.mat','mean_p')
+    save('C:\Experiments\simulation results\1d speckle spinor\12072018kick_evolve_with_soc_no_speckle/mom_evo.mat','mom_evo')
+    save('C:\Experiments\simulation results\1d speckle spinor\12072018kick_evolve_with_soc_no_speckle/prof_evo.mat','prof_evo')
+    save('C:\Experiments\simulation results\1d speckle spinor\12072018kick_evolve_with_soc_no_speckle/final_phi.mat','final_phi')
+    save('C:\Experiments\simulation results\1d speckle spinor\12072018kick_evolve_with_soc_no_speckle/mean_m.mat','mean_m')
+    save('C:\Experiments\simulation results\1d speckle spinor\12072018kick_evolve_with_soc_no_speckle/mean_p.mat','mean_p')
    
 end

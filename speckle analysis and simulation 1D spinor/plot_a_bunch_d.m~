@@ -4,8 +4,8 @@ for mk=1:8
     for i=1:200
         momj = zeros(3,Nx);
         phij = zeros(3,Nx);
-        for j=1:20
-            phi = load(strcat('simulation_results/11302018kick_evolve_with_soc/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'));
+        
+            phi = load(strcat('simulation_results/12072018kick_evolve_with_soc_no_speckle/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'));
             phi = phi.phi_1;
             phij = phij + sq(phi);
             fp = sq(fourier_transform(phi,Nx,deltax));
