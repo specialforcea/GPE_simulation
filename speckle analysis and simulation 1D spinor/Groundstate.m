@@ -1,5 +1,5 @@
-Deltat = 1e-9;
-Stop_crit = 2e-8;
+Deltat = 1e-3;
+Stop_crit = 3e-16;
 
 
 
@@ -26,6 +26,11 @@ while (diff)
     difference = max(abs(phi_up-phi))
     if (difference < Stop_crit)
         diff = 0;
+    end
+    
+    if(mod(n,evo) == 0)
+        plot(X,sq(phi))
+        drawnow;
     end
     
 %     if (mod(n,evo) == 0)

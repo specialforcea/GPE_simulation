@@ -1,5 +1,5 @@
-Deltat = 1e-9;
-Stop_crit = 2e-8;
+Deltat = 1e-3;
+Stop_crit = 3e-16;
 
 
 
@@ -23,15 +23,18 @@ while (diff)
    
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
     phi_up = time_evolve_ground(phi, potential,Deltat,X,Nx,deltax,deltaf,L,c0);
+ 
     difference = max(abs(phi_up-phi))
     if (difference < Stop_crit)
         diff = 0;
     end
     
-%     if (mod(n,evo) == 0)
+    if (mod(n,evo) == 0)
+        plot(X,sq(phi(1,:)))
+        drawnow;
 %         max(abs(phi_up-phi))
 %         chem_pot(phi,X,Nx,c0,k_scale,deltax,deltaf,V,L)
-%     end
+    end
     phi = phi_up;
     n = n + 1;
     
