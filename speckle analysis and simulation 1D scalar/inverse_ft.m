@@ -5,4 +5,4 @@ function y = inverse_ft(phi,Nx,deltaf)
 % phi_1 =parity.*phi;
 % y = ifft(phi_1).*deltaf*Nx;
 % y = y.* parity;
-y = ifft(ifftshift(phi)).*deltaf.*Nx;
+y = ifft(ifftshift(phi),Nx,2).*deltaf.*Nx;
