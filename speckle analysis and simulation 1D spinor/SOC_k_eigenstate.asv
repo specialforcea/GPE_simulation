@@ -25,7 +25,7 @@ for j=1:10
     %         plot(f./k_R*2*pi,sq(fourier_transform(phi,Nx,deltax)));
              drawnow;
         end
-        save(strcat('simulation_results/02012019SOC_k_eigenstate/phi_1_25ms_318ms_grad_',num2str(j),'.mat'),'phi_1');
+        save(strcat('simulation_results/01282019SOC_k_eigenstate/phi_1_25ms_318ms_0d_1E_grad_',num2str(j),'.mat'),'phi_1');
     end
 
 
@@ -45,10 +45,10 @@ for j=1:10
             plot(X,sq(phi(1,:)),X,sq(phi(2,:)))
             drawnow;
         end
-            save(strcat('simulation_results/02012019SOC_k_eigenstate/spin125ms_25ms_318ms_grad_',num2str(j),'.mat'),'spin1');
+            save('simulation_results/02012019SOC_k_eigenstate/spin125ms_50ms_318ms.mat','spin1');
             
-            save(strcat('simulation_results/02012019SOC_k_eigenstate/width25ms_25ms_318ms_grad_',num2str(j),'.mat'),'width');
-            save(strcat('simulation_results/02012019SOC_k_eigenstate/pos25ms_25ms_318ms_grad_',num2str(j),'.mat'),'pos');
+            save('simulation_results/01282019SOC_k_eigenstate/width25ms_50ms_318ms.mat','width');
+            save('simulation_results/01282019SOC_k_eigenstate/pos25ms_50ms_318ms.mat','pos');
 
     end
 end

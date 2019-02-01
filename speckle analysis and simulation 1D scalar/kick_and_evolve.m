@@ -1,25 +1,26 @@
 
 
-i=4;
+i=7;
 filepath = strcat('speckle bench test data/numerical_speckle/inten_', num2str(i),'.mat');
 speckle = load(filepath);
 speckle = speckle.inten;
 
-speckle = 5*speckle/1e4*3;%average intensity about 5 in simulation units, 15%
+speckle = speckle/1e6;%average intensity about 1 in simulation units
 
+speckle = speckle*3;%make it 10% of chemical potential.
 
-
-mom_evo = zeros(8,20,200);
-prof_evo = zeros(8,20,200);
-mean_m = zeros(8,20,200);
-mean_p = zeros(8,20,200);
+save_path = 'C:\Experiments\simulation\GPE_yuchen\GPE_simulation\speckle analysis and simulation 1D scalar\simulation_results';
+mom_evo = zeros(8,20,320);
+prof_evo = zeros(8,20,320);
+mean_m = zeros(8,20,320);
+mean_p = zeros(8,20,320);
 final_phi = zeros(8,20,Nx);
 
-kicks = [0.5,1,2,3,4,5,10,20];
+kicks = [0.2,0.5,0.8,1.2,1.5,1.8,2.1,2.5];
 
 for mk=1:3
     phi_mk = phi_0;
-    phi_mk(1,:) = phi_mk(1,:).*exp(-1i*k_R*kicks(mk)*X);
+    phi_mk(1,:) = phi_mk(1,:).*exp(1i*k_R*kicks(mk)*X);
     rand_row = randi([1 Nx],1,20);
     for j=1:20
 
@@ -27,8 +28,8 @@ for mk=1:3
 
         phi = phi_mk;
 
-        for i=1:200
-            phi_1 = dynamic(phi,1e-2,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,Omega,xmin,xmax);
+        for i=1:320
+            phi_1 = dynamic(phi,0.005,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,Omega,xmin,xmax);
 
             fp = sq(fourier_transform(phi_1(1,:),Nx,deltax));
 
@@ -45,15 +46,15 @@ for mk=1:3
 
             phi = phi_1;
 
-            save(strcat('C:\Experiments\simulation results\1d speckle scalar\12072018kick_and_evolve/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
+            save(strcat(save_path,'\01312019kick_and_evolve\phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
         end
 
         final_phi(mk,j,:) = reshape(phi(1,:),[1,1,Nx]);
 
-        save('C:\Experiments\simulation results\1d speckle scalar\12072018kick_and_evolve/mom_evo.mat','mom_evo')
-        save('C:\Experiments\simulation results\1d speckle scalar\12072018kick_and_evolve/prof_evo.mat','prof_evo')
-        save('C:\Experiments\simulation results\1d speckle scalar\12072018kick_and_evolve/final_phi.mat','final_phi')
-        save('C:\Experiments\simulation results\1d speckle scalar\12072018kick_and_evolve/mean_m.mat','mean_m')
-        save('C:\Experiments\simulation results\1d speckle scalar\12072018kick_and_evolve/mean_p.mat','mean_p')
+        save(strcat(save_path,'\01312019kick_and_evolve\mom_evo.mat'),'mom_evo')
+        save(strcat(save_path,'\01312019kick_and_evolve\prof_evo.mat'),'prof_evo')
+        save(strcat(save_path,'\01312019kick_and_evolve\final_phi.mat'),'final_phi')
+        save(strcat(save_path,'\01312019kick_and_evolve\mean_m.mat'),'mean_m')
+        save(strcat(save_path,'\01312019kick_and_evolve\mean_p.mat'),'mean_p')
     end
 end
