@@ -1,23 +1,35 @@
 
 grads = 0.05;%zeros(1,1601);
 %grads = [10,20,30,40,50,60];
-et = [1800,2000,2200,2400,2600,2800];
+et = [1800,2000,2200,1600,1800,2000];
 spin1 = zeros(6,320);
 
 width = zeros(6,320);
 pos = zeros(6,320);
 
-for j=1:6
+for j=4:6
     grad = zeros(1,et(j)+1);
     grad(1:et(j)/2+1) = linspace(0,(et(j)/2+1)*grads,et(j)/2+1);
     grad(et(j)/2+2:end) = linspace((et(j)/2)*grads,0,et(j)/2);
+    grad(grad>54) = 50;
     draw = 0;
     phi = phi_e;
+    m0 = int16(sum(Nm.*sq(phi_e(1,:)))/sum(sq(phi_e(1,:))));
+    
     
     
     for i=1:et(j)
         phi_1 = dynamic(phi,0.001,1e-5,c0,c2,Nx,-grad(i+1)*X,1,0,k_scale,f,deltax,deltaf,L,1*detuning,xmin,xmax,k_R,detuning);
        % phi_1 = dynamic(phi,0.001,1e-5,c0,c2,Nx,0,1,0,k_scale,f,deltax,deltaf,L,4*detuning,xmin,xmax,k_R,detuning);
+        
+       Nm = -(Nx-1)/2:1:(Nx-1)/2;
+       m = int16(sum(Nm.*sq(phi_1(1,:)))/sum(sq(phi_1(1,:)))) - m0;
+       if m>0
+            phi_1(:,1:Nx-m) = phi_1(:,m+1:end);
+       else
+          phi_1(:,-m+1:end) = phi_1(:,1:Nx+m);
+       end
+        
 
         phi = phi_1;
         if draw==1 && mod(i,60)==0
