@@ -10,10 +10,10 @@ savepath = 'simulation_results/02062019SOC_dressed_state_8TF/phi_1_25ms_';
 Omega = linspace(0,1*detuning,1601);
 
 draw = 0;
-spin1 = zeros(6,320);
-spin2 = zeros(6,320);
-width = zeros(6,320);
-pos = zeros(6,320);
+spin1 = zeros(8,320);
+spin2 = zeros(8,320);
+width = zeros(8,320);
+pos = zeros(8,320);
 
 
 for j=1:8

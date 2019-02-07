@@ -1,4 +1,4 @@
-Deltat = 1i*1e-7;
+Deltat = 1i*1e-5;
 Stop_crit = 3e-16;
 
 

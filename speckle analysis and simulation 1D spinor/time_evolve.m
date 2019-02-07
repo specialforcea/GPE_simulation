@@ -8,7 +8,7 @@ pot = [p;p;p];
 
 nonlin_pot = zeros(3,Nx);
 nonlin_pot(1,:) = c0.*tot_density + c2.*(density(1,:) + density(2,:) - density(3,:));
-nonlin_pot(2,:) = c0.*tot_density + c2.*(density(1,:) + density(3,:)) + 0*detuning;
+nonlin_pot(2,:) = c0.*tot_density + c2.*(density(1,:) + density(3,:)) + detuning;
 %nonlin_pot(3,:) = c0.*tot_density + c2.*(density(3,:) + density(2,:) - density(1,:)) - 500*detuning;
 
 
