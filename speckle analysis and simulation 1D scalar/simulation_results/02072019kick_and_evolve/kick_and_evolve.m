@@ -1,13 +1,13 @@
 
 
 i=8;
-filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
+filepath = strcat('speckle bench test data/numerical_speckle/inten_', num2str(i),'.mat');
 speckle = load(filepath);
 speckle = speckle.inten;
 
 speckle = speckle/1e6;%average intensity about 1 in simulation units
 
-speckle = speckle*5;%make it 68% of chemical potential.
+speckle = speckle*5;%make it 10% of chemical potential.
 
 save_path = 'C:\Experiments\simulation\GPE_yuchen\GPE_simulation\speckle analysis and simulation 1D scalar\simulation_results';
 mom_evo = zeros(8,10,320);
@@ -46,15 +46,15 @@ for mk=1:8
 
             phi = phi_1;
 
-            save(strcat(save_path,'\02082019kick_and_evolve\phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
+            save(strcat(save_path,'\02072019kick_and_evolve\phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
         end
 
         final_phi(mk,j,:) = reshape(phi(1,:),[1,1,Nx]);
 
-        save(strcat(save_path,'\02082019kick_and_evolve\mom_evo.mat'),'mom_evo')
-        save(strcat(save_path,'\02082019kick_and_evolve\prof_evo.mat'),'prof_evo')
-        save(strcat(save_path,'\02082019kick_and_evolve\final_phi.mat'),'final_phi')
-        save(strcat(save_path,'\02082019kick_and_evolve\mean_m.mat'),'mean_m')
-        save(strcat(save_path,'\02082019kick_and_evolve\mean_p.mat'),'mean_p')
+        save(strcat(save_path,'\02072019kick_and_evolve\mom_evo.mat'),'mom_evo')
+        save(strcat(save_path,'\02072019kick_and_evolve\prof_evo.mat'),'prof_evo')
+        save(strcat(save_path,'\02072019kick_and_evolve\final_phi.mat'),'final_phi')
+        save(strcat(save_path,'\02072019kick_and_evolve\mean_m.mat'),'mean_m')
+        save(strcat(save_path,'\02072019kick_and_evolve\mean_p.mat'),'mean_p')
     end
 end

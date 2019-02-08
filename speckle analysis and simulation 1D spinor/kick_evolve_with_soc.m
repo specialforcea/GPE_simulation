@@ -15,16 +15,16 @@ speckle = speckle/1e6;%average intensity about 1 in simulation units
 speckle = speckle*3;%make it 10% of chemical potential.
 
 
-mom_evo = zeros(5,20,2,320);
-prof_evo = zeros(5,20,2,320);
-mean_m = zeros(5,20,2,320);
-mean_p = zeros(5,20,2,320);
-final_phi = zeros(5,20,2,Nx);
+% mom_evo = zeros(5,20,2,320);
+% prof_evo = zeros(5,20,2,320);
+% mean_m = zeros(5,20,2,320);
+% mean_p = zeros(5,20,2,320);
+% final_phi = zeros(5,20,2,Nx);
 
 
 
 
-for mk=1:5
+for mk=6:6
     if mk==1
         phi_mk = phi1;
     elseif mk==2
@@ -35,6 +35,8 @@ for mk=1:5
         phi_mk = phi4;
      elseif mk==5
         phi_mk = phi5;
+    elseif mk==6
+        phi_mk = phi6;
     end
         
         

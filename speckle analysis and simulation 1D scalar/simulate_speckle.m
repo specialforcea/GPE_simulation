@@ -19,14 +19,14 @@ if create==1
 
         inten = sq(fftshift(fft2(exp(-2*pi*1i*rand(2^j)),Nx,Nx)));
 
-        save(strcat('speckle bench test data/numerical_speckle/inten_', num2str(j-3),'.mat'), 'inten')
+        save(strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(j-3),'.mat'), 'inten')
 
 
     end
 end
 
 if analysis==1
-    N_x = 300;
+    N_x = 2500;
     kr = (1:1:N_x)*deltaf/k_R*2*pi;
     pow_r = zeros(10,N_x);
 
@@ -34,8 +34,8 @@ if analysis==1
     corr_r = zeros(10,N_x);
     cors = zeros(1,10);
 
-    for i=5:5
-        filepath = strcat('speckle bench test data/numerical_speckle/inten_', num2str(i),'.mat');
+    for i=8:8
+        filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
         speckle = load(filepath);
         speckle = speckle.inten;
         speckle = double(speckle);
@@ -43,7 +43,7 @@ if analysis==1
         fsp = fftshift(fft2(speckle));
         fsp = sq(fsp);
 
-        corr = abs(fftshift(ifft2(fsp)));
+        %corr = abs(fftshift(ifft2(fsp)));
         [maxr,maxc] = find(fsp==max(max(fsp)));
         %[maxr,maxc] = find(corr==max(max(corr)));
 
@@ -86,13 +86,13 @@ if analysis==1
 
     %fit linear PSD to data
         figure(i)
-        f = fit(kr(7:end)',pow_r(i,7:end)','a*max(1-x/b,0)','StartPoint',[max(pow_r(i,7:end)),4]);
+        f = fit(kr(300:end)',pow_r(i,300:end)','a*max(1-x/b,0)','StartPoint',[max(pow_r(i,300:end)),4]);
         coe = coeffvalues(f);
-        plot(f,kr(7:end),pow_r(i,7:end))
+        plot(f,kr(300:end),pow_r(i,300:end))
         title('fit linear PSD to data')
         xlabel('k/k_R in radial direction')
         ylabel('power density')
-        text(5,2e11,strcat('k_m_a_x = ',num2str(coe(2))))
+        text(3,2e21,strcat('k_m_a_x = ',num2str(coe(2))))
 
 
     %fit correlation length
