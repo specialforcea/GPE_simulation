@@ -3,8 +3,10 @@
 
 phi = phi_0;
 
-ks = [1.0,1.3,1.5,1.7,2.0,2.2];
+ks = [0.2,0.4,0.6,0.8,1.0,1.3,1.5,1.7,2.0,2.2];
 dts = (2+ks).^2 - ks.^2 - 4;
+
+
 savepath = 'simulation_results/02072019SOC_dressed_state_8TF/phi_1_50ms_';
 
 Omega = linspace(0,1*detuning,3201);
