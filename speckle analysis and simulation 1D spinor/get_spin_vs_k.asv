@@ -29,10 +29,3 @@ OmegaR = 0.7;
 wavepath = 'simulation_results/02152019SOC_dressed_state_8TF13/phi_1_50ms_';
 savepath = 'simulation_results/02262019kick_evolve_with_soc/07';
 kick_evolve_with_soc;
-
-
-
-
-
-
-
