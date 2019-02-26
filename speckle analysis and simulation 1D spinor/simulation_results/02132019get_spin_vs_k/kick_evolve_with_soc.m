@@ -14,24 +14,24 @@ speckle = speckle/1e6;%average intensity about 1 in simulation units
 
 speckle = speckle*5;%make it 68% of chemical potential.
 
-ks = [0.2,0.4,0.8,1.0,1.3,1.5,1.7,2.0,2.2];
-dts = (2+ks).^2 - ks.^2 - 4;
+% ks = [0.2,0.4,0.8,1.0,1.3,1.5,1.7,2.0,2.2];
+% dts = (2+ks).^2 - ks.^2 - 4;
 
-wavepath = 'simulation_results/02072019SOC_dressed_state_8TF13/phi_1_50ms_';
+wavepath = 'simulation_results/02132019SOC_dressed_state_8TF13/phi_1_50ms_';
 %savepath = 'simulation_results/02072019SOC_dressed_state_8TF/phi_1_50ms_';
 
 
-mom_evo = zeros(9,10,2,320);
-prof_evo = zeros(9,10,2,320);
-mean_m = zeros(9,10,2,320);
-mean_p = zeros(9,10,2,320);
-spin1 = zeros(9,10,320);
-final_phi = zeros(9,10,2,Nx);
+mom_evo = zeros(12,10,2,200);
+prof_evo = zeros(12,10,2,200);
+mean_m = zeros(12,10,2,200);
+mean_p = zeros(12,10,2,200);
+spin1 = zeros(12,10,200);
+final_phi = zeros(12,10,2,Nx);
 
 
 
 
-for mk=1:9
+for mk=1:12
     load(strcat(wavepath,num2str(dts(mk)),'d_1E.mat'));
     phi_mk = phi_1.*[exp(1i.*ks(mk).*k_R.*X);exp(1i.*ks(mk).*k_R.*X);exp(1i.*ks(mk).*k_R.*X)];
         
@@ -43,7 +43,7 @@ for mk=1:9
 
         phi = phi_mk;
 
-        for i=1:320
+        for i=1:200
             phi_1 = dynamic(phi,0.005,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,1*detuning,xmin,xmax,k_R,0);
             
             spin1(mk,j,i) = integr(sq(phi_1(1,:)),Nx,deltax);
@@ -77,16 +77,16 @@ for mk=1:9
 
             phi = phi_1;
             
-            save(strcat('simulation_results/02112019kick_evolve_with_soc/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
+            save(strcat('simulation_results/02132019kick_evolve_with_soc/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
 
         end
         
         final_phi(mk,j,:,:) = reshape(phi(1:2,:),[1,1,2,Nx]);
-        save('simulation_results/02112019kick_evolve_with_soc/mom_evo.mat','mom_evo')
-        save('simulation_results/02112019kick_evolve_with_soc/prof_evo.mat','prof_evo')
-        save('simulation_results/02112019kick_evolve_with_soc/final_phi.mat','final_phi')
-        save('simulation_results/02112019kick_evolve_with_soc/mean_m.mat','mean_m')
-        save('simulation_results/02112019kick_evolve_with_soc/mean_p.mat','mean_p')
-        save('simulation_results/02112019kick_evolve_with_soc/spin1.mat','spin1')
+        save('simulation_results/02132019kick_evolve_with_soc/mom_evo.mat','mom_evo')
+        save('simulation_results/02132019kick_evolve_with_soc/prof_evo.mat','prof_evo')
+        save('simulation_results/02132019kick_evolve_with_soc/final_phi.mat','final_phi')
+        save('simulation_results/02132019kick_evolve_with_soc/mean_m.mat','mean_m')
+        save('simulation_results/02132019kick_evolve_with_soc/mean_p.mat','mean_p')
+        save('simulation_results/02132019kick_evolve_with_soc/spin1.mat','spin1')
     end
 end

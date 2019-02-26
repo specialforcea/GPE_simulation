@@ -3,19 +3,17 @@
 
 phi = phi_0;
 
-% ks = [0.2,0.4,0.6,0.8,1.0,1.3,1.5,1.7,2.0,2.2];
+% ks = [0.2,0.4,0.6,0.8];
 % dts = (2+ks).^2 - ks.^2 - 4;
-
-
 savepath = 'simulation_results/02132019SOC_dressed_state_8TF13/phi_1_50ms_';
 
 Omega = linspace(0,1*detuning,3201);
 
 draw = 0;
-spin1 = zeros(6,320);
-spin2 = zeros(6,320);
-width = zeros(6,320);
-pos = zeros(6,320);
+% spin1_2 = zeros(4,320);
+% spin2_2 = zeros(4,320);
+% width_2 = zeros(4,320);
+% pos_2 = zeros(4,320);
 
 
 for j=1:12
@@ -65,22 +63,22 @@ end
 %         %save('simulation_results/01182019SOC_dressed_state/phi_dress25ms_25ms_0d_1E.mat','phi_dress');
 %     end
 
-
+% 
 % phi = phi_1.*[exp(1i.*ks(j).*k_R.*X);exp(1i.*ks(j).*k_R.*X);exp(1i.*ks(j).*k_R.*X)];
-
-
-    
+% 
+% 
+%     
 %     for i=1:320
 %         phi_dress = dynamic(phi,0.005,1e-5,c0,c2,Nx,0,0,0,k_scale,f,deltax,deltaf,L,1*detuning,xmin,xmax,k_R,0);
 %         phi = phi_dress;
-%         spin1(j,i) = integr(sq(phi(1,:)),Nx,deltax);
-%         spin2(j,i) = integr(sq(phi(2,:)),Nx,deltax);
-%         m1 = integr(X.*sq(phi(1,:)),Nx,deltax)/spin1(j,i);
-%         m2 = integr(X.*sq(phi(2,:)),Nx,deltax)/spin2(j,i);
-%         w1 = sqrt(integr((X-m1).^2.*sq(phi(1,:)),Nx,deltax)/spin1(j,i));
-%         w2 = sqrt(integr((X-m2).^2.*sq(phi(2,:)),Nx,deltax)/spin2(j,i));
-%         width(j,i) = w1*spin1(j,i) + w2*spin2(j,i);
-%         pos(j,i) = m1*spin1(j,i) + m2*spin2(j,i);
+%         spin1_2(j,i) = integr(sq(phi(1,:)),Nx,deltax);
+%         spin2_2(j,i) = integr(sq(phi(2,:)),Nx,deltax);
+%         m1 = integr(X.*sq(phi(1,:)),Nx,deltax)/spin1_2(j,i);
+%         m2 = integr(X.*sq(phi(2,:)),Nx,deltax)/spin2_2(j,i);
+%         w1 = sqrt(integr((X-m1).^2.*sq(phi(1,:)),Nx,deltax)/spin1_2(j,i));
+%         w2 = sqrt(integr((X-m2).^2.*sq(phi(2,:)),Nx,deltax)/spin2_2(j,i));
+%         width_2(j,i) = w1*spin1_2(j,i) + w2*spin2_2(j,i);
+%         pos_2(j,i) = m1*spin1_2(j,i) + m2*spin2_2(j,i);
 %         if draw==1 && mod(i,30)==0
 %             plot(X,sq(phi(1,:)),X,sq(phi(2,:)))
 %             drawnow;
@@ -88,10 +86,10 @@ end
 %    
 %     end
 %     
-%             save('simulation_results/02072019SOC_dressed_state_8TF/spin125ms_50ms.mat','spin1');
-%             save('simulation_results/02072019SOC_dressed_state_8TF/spin225ms_50ms.mat','spin2');
-%             save('simulation_results/02072019SOC_dressed_state_8TF/width25ms_50ms.mat','width');
-%             save('simulation_results/02072019SOC_dressed_state_8TF/pos25ms_50ms.mat','pos');
+%             save('simulation_results/02072019SOC_dressed_state_8TF13/spin1_2_25ms_50ms.mat','spin1_2');
+%             save('simulation_results/02072019SOC_dressed_state_8TF13/spin2_2_25ms_50ms.mat','spin2_2');
+%             save('simulation_results/02072019SOC_dressed_state_8TF13/width_2_25ms_50ms.mat','width_2');
+%             save('simulation_results/02072019SOC_dressed_state_8TF13/pos_2_25ms_50ms.mat','pos_2');
 end
 
 
