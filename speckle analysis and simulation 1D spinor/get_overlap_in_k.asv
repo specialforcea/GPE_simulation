@@ -1,15 +1,15 @@
 
 overlap1 = zeros(1,18);
-wavepath = 'simulation_results/02132019SOC_dressed_state_8TF13/phi_1_50ms_';
-OmegaR = 1.0;
+wavepath = 'simulation_results/02152019SOC_dressed_state_8TF13/phi_1_50ms_';
+OmegaR = 0.7;
 
-for m=1:9
-    load(strcat(wavepath,num2str(dts(m)),'d_',num2str(OmegaR),'E.mat'));
+for mk=1:18
+    load(strcat(wavepath,num2str(dts(mk)),'d_',num2str(OmegaR),'E.mat'));
     sp1 = integr(sq(phi_1(1,:)),Nx,deltax);
     fp = sq(fourier_transform(phi_1(1,:),Nx,deltax));
     mean_mom = integr(f.*fp,Nx,deltaf)/sp1;
     mm = mean_mom/k_R*2*pi;
-    kick = ks(m) - mm;
+    kick = ks(mk) - mm;
     
     
     phi_m = phi_1.*[exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X)];
@@ -20,8 +20,8 @@ for m=1:9
         phiiup = phi_m(1,:);
         phiidown = phi_m(2,:);
         
-        phifup = reshape(final_phi(m,j,1,:),[1,Nx]);
-        phifdown = reshape(final_phi(m,j,2,:),[1,Nx]);
+        phifup = reshape(final_phi(mk,j,1,:),[1,Nx]);
+        phifdown = reshape(final_phi(mk,j,2,:),[1,Nx]);
         a = sqrt(integr(sq(phiiup),Nx,deltax));
         b = sqrt(integr(sq(phiidown),Nx,deltax));
         c = sqrt(integr(sq(phifup),Nx,deltax));
