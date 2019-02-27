@@ -10,15 +10,15 @@ speckle = speckle/1e6;%average intensity about 1 in simulation units
 speckle = speckle*5;%make it 68% of chemical potential.
 
 % save_path = 'C:\Experiments\simulation\GPE_yuchen\GPE_simulation\speckle analysis and simulation 1D scalar\simulation_results';
-mom_evo = zeros(18,10,200);
-prof_evo = zeros(18,10,200);
-mean_m = zeros(18,10,200);
-mean_p = zeros(18,10,200);
-final_phi = zeros(18,10,Nx);
+% mom_evo = zeros(18,10,200);
+% prof_evo = zeros(18,10,200);
+% mean_m = zeros(18,10,200);
+% mean_p = zeros(18,10,200);
+% final_phi = zeros(18,10,Nx);
 
 kicks = [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,2.0,2.2];
 
-for mk=1:4
+for mk=3:18
     phi_mk = phi_0;
     phi_mk(1,:) = phi_mk(1,:).*exp(1i*k_R*kicks(mk)*X);
     rand_row = randi([1 Nx],1,10);

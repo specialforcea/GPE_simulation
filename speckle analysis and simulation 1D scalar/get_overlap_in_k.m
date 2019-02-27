@@ -1,14 +1,14 @@
 overlap1 = zeros(1,8);
 
-for mk = 1:8
-    phi_mk = phi_0;
-    phi_mk(1,:) = phi_mk(1,:).*exp(1i*k_R*kicks1(mk)*X);
+for m = 1:4
+    phi_m = phi_0;
+    phi_m(1,:) = phi_m(1,:).*exp(1i*k_R*kick1(m)*X);
     
-    phii = phi_mk(1,:);
+    phii = phi_m(1,:);
     ol = zeros(1,10);
     
     for j=1:10
-        phif = reshape(final_phi(mk,j,:),[1,Nx]);
+        phif = reshape(final_phi(m,j,:),[1,Nx]);
         
         a = sqrt(integr(sq(phii),Nx,deltax));
         
@@ -23,7 +23,7 @@ for mk = 1:8
         ol(j) = a^2*c^2*O;
         
     end
-    overlap1(mk) = mean(ol);
+    overlap1(m) = mean(ol);
     
 end
         
