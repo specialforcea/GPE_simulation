@@ -17,17 +17,17 @@ dts = (2+ks).^2 - ks.^2 - 4;
 
 OmegaR = 1.0;
 wavepath = 'simulation_results/02132019SOC_dressed_state_8TF13/phi_1_50ms_';
-savepath = 'simulation_results/02262019kick_evolve_with_soc/10';
+savepath = 'simulation_results/03012019kick_evolve_with_soc/10';
 kick_evolve_with_soc;
 
 OmegaR = 0.5;
 wavepath = 'simulation_results/02152019SOC_dressed_state_8TF13/phi_1_50ms_';
-savepath = 'simulation_results/02262019kick_evolve_with_soc/05';
+savepath = 'simulation_results/03012019kick_evolve_with_soc/05';
 kick_evolve_with_soc;
 
 OmegaR = 0.7;
 wavepath = 'simulation_results/02152019SOC_dressed_state_8TF13/phi_1_50ms_';
-savepath = 'simulation_results/02262019kick_evolve_with_soc/07';
+savepath = 'simulation_results/03012019kick_evolve_with_soc/07';
 kick_evolve_with_soc;
 
 

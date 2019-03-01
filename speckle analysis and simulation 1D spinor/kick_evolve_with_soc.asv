@@ -31,16 +31,16 @@ final_phi = zeros(18,10,2,Nx);
 
 
 
-for mk=1:18
+for mk=11:18
     load(strcat(wavepath,num2str(dts(mk)),'d_',num2str(OmegaR),'E.mat'));
-    spin1 = integr(sq(phi_1(1,:)),Nx,deltax);
+    sp1 = integr(sq(phi_1(1,:)),Nx,deltax);
     fp = sq(fourier_transform(phi_1(1,:),Nx,deltax));
-    mean_mom = integr(f.*fp,Nx,deltaf)/spin1;
+    mean_mom = integr(f.*fp,Nx,deltaf)/sp1;
     mm = mean_mom/k_R*2*pi;
-    kick = ks(mk) - mm
+    kick = ks(mk) - mm;
     
     
-    phi_mk = phi_1.*[exp(1i.*ks(mk).*k_R.*X);exp(1i.*ks(mk).*k_R.*X);exp(1i.*ks(mk).*k_R.*X)];
+    phi_mk = phi_1.*[exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X)];
     
         
         

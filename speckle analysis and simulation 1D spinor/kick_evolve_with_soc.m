@@ -52,7 +52,7 @@ for mk=1:18
         phi = phi_mk;
 
         for i=1:200
-            phi_1 = dynamic(phi,0.005,1e-5,0,0,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,OmegaR*detuning,xmin,xmax,k_R,0);
+            phi_1 = dynamic(phi,0.005,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,OmegaR*detuning,xmin,xmax,k_R,0);
             
             spin1(mk,j,i) = integr(sq(phi_1(1,:)),Nx,deltax);
             fp1 = sq(fourier_transform(phi_1(1,:),Nx,deltax));
