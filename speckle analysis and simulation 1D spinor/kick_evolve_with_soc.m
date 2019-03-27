@@ -21,13 +21,13 @@ speckle = speckle*5;%make it 68% of chemical potential.
 %savepath = 'simulation_results/02072019SOC_dressed_state_8TF/phi_1_50ms_';
 
 
-mom_evo = zeros(18,10,2,200);
-prof_evo = zeros(18,10,2,200);
-mean_m = zeros(18,10,2,200);
-mean_p = zeros(18,10,2,200);
-spin1 = zeros(18,10,200);
-final_phi = zeros(18,10,2,Nx);
-
+% mom_evo = zeros(18,10,2,200);
+% prof_evo = zeros(18,10,2,200);
+% mean_m = zeros(18,10,2,200);
+% mean_p = zeros(18,10,2,200);
+% spin1 = zeros(18,10,200);
+% final_phi = zeros(18,10,2,Nx);
+% 
 
 
 
