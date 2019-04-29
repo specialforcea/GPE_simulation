@@ -9,12 +9,12 @@ y1 = (band+1).^2;
 y2 = (band-1).^2;
 dt = abs(y2-y1);
 up = min(y1,y2) + 1/2*(dt+sqrt(dt.^2+OmegaR^2));
-down = min(y1,y2) + 1/2*(dt+sqrt(dt.^2-OmegaR^2));
+down = min(y1,y2) + 1/2*(dt-sqrt(dt.^2+OmegaR^2));
 dtn = zeros(1,21);
 [~,k0] = min(down(4001:end));
 k0 = k0 + 4000;
 for i=1:21
-    [~,k1] = min(abs(X-ks(i)-1));
+    [~,k1] = min(abs(band-ks(i)-1));
     dtn(1,i) = up(k1) - down(k1) - (up(k0) - down(k0));
 end
 % ks = [0.2,0.4,0.6,0.8];

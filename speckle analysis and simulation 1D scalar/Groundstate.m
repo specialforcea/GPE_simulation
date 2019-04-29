@@ -14,7 +14,7 @@ diff = 1;
 %show difference every evo of evolutions
 evo = 200;
 n = 0;
-
+draw = 0;
 
 
 
@@ -24,12 +24,12 @@ while (diff)
     %phi_up = strang_evolve(phi, potential,Deltat,X,Beta,Nx,deltax,deltaf,L );
     phi_up = time_evolve_ground(phi, potential,Deltat,X,Nx,deltax,deltaf,L,c0);
  
-    difference = max(abs(phi_up-phi))
+    difference = max(abs(phi_up-phi));
     if (difference < Stop_crit)
         diff = 0;
     end
     
-    if (mod(n,evo) == 0)
+    if (draw && mod(n,evo) == 0)
         plot(X,sq(phi(1,:)))
         drawnow;
 %         max(abs(phi_up-phi))
