@@ -16,7 +16,7 @@ c2 = pre_c2*N/(hbar*Dip_freq*a_0^3)/6;
 
 quanta = hbar*Dip_freq;
 k_scale = k*a_0;%dimensionless k in the probelm
-Raman_beams_angle = 180;%deg
+Raman_beams_angle = 30;%deg
 k_R = k_scale*sin(Raman_beams_angle/2/180*pi);
 
 E_r = (hbar)^2*(k_R/a_0)^2/(2*Rb_Mass);%recoil energy
@@ -28,7 +28,7 @@ xmax = 8*TF_radius;
 
 L = xmax-xmin;
 Nx = 2^13+1; %number of grids.
-Ns = 1280;
+Ns = 1000;
 
 speckle_mag = 46;
 deltas = 4.8e-6/speckle_mag/a_0;
