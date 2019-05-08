@@ -1,4 +1,9 @@
 
+scale_parameters;
+ks = (1.2:0.1:3.2);
+OmegaR = 4.0;
+k_minima = sqrt((4*ks).^2./(OmegaR^2 + (4*ks).^2));
+
 
 i=8;
 filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
@@ -9,44 +14,42 @@ speckle = speckle/1e6;%average intensity about 1 in simulation units
 
 speckle = speckle*5;%make it 68% of chemical potential.
 
-% ks = [0.2,0.4,0.8,1.0,1.3,1.5,1.7,2.0,2.2];
-% dts = (2+ks).^2 - ks.^2 - 4;
 
-% wavepath = 'simulation_results/02212019SOC_dressed_state_8TF13/phi_1_12ms_';
-%savepath = 'simulation_results/02072019SOC_dressed_state_8TF/phi_1_50ms_';
+wavepath = 'simulation_results/05012019SOC_dressed_state_8TF13/phi_1_200ms_';
+savepath = 'simulation_results/05062019kick_evolve_with_soc_cluster/4_5';
 
 
-% mom_evo = zeros(18,10,2,200);
-% prof_evo = zeros(18,10,2,200);
-% mean_m = zeros(18,10,2,200);
-% mean_p = zeros(18,10,2,200);
-% spin1 = zeros(18,10,200);
-% final_phi = zeros(18,10,2,Nx);
-% 
+mom_evo = zeros(21,20,2,320);
+prof_evo = zeros(21,20,2,320);
+mean_m = zeros(21,20,2,320);
+mean_p = zeros(21,20,2,320);
+spin1 = zeros(21,20,320);
+final_phi = zeros(21,20,2,Nx);
 
 
 
-for mk=1:18
-    load(strcat(wavepath,num2str(dts(mk)),'d_',num2str(OmegaR),'E.mat'));
-    sp1 = integr(sq(phi_1(1,:)),Nx,deltax);
-    fp = sq(fourier_transform(phi_1(1,:),Nx,deltax));
-    mean_mom = integr(f.*fp,Nx,deltaf)/sp1;
-    mm = mean_mom/k_R*2*pi;
-    kick = ks(mk) - mm;
+
+for mk=17:21
+
+    load(strcat(wavepath,num2str(ks(mk)),'k_R_',num2str(OmegaR),'E.mat'));
+    
+	
+	kick = ks(mk) - k_minima(mk);
+	
     
     
     phi_mk = phi_1.*[exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X)];
     
         
         
-    rand_row = randi([1 Nx],1,10);
-    for j=1:10
-
+    rand_row = randi([1 Nx],1,20);
+    for j=1:20
+		'05_1 alive'
         speckle_row = speckle(rand_row(j),:);
 
         phi = phi_mk;
 
-        for i=1:200
+        for i=1:320
             phi_1 = dynamic(phi,0.005,1e-5,c0,c2,Nx,speckle_row,0,0,k_scale,f,deltax,deltaf,L,OmegaR*detuning,xmin,xmax,k_R,0);
             
             spin1(mk,j,i) = integr(sq(phi_1(1,:)),Nx,deltax);
@@ -71,16 +74,9 @@ for mk=1:18
             mean_p(mk,j,1,i) = mean_prof1;
             mean_p(mk,j,2,i) = mean_prof2;
 
-
-            
-            
-
-                    %plot(f(1,3500:4500)./k_spacing,fp(1,3500:4500))
-
-
             phi = phi_1;
             
-            save(strcat(savepath,'/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
+            %save(strcat(savepath,'/phi_',num2str(mk),'_',num2str(j),'_',num2str(i),'.mat'),'phi_1')
 
         end
         

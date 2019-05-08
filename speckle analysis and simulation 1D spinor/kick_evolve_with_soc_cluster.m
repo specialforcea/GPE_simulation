@@ -9,11 +9,9 @@ speckle = speckle/1e6;%average intensity about 1 in simulation units
 
 speckle = speckle*5;%make it 68% of chemical potential.
 
-% ks = [0.2,0.4,0.8,1.0,1.3,1.5,1.7,2.0,2.2];
-% dts = (2+ks).^2 - ks.^2 - 4;
 
-% wavepath = 'simulation_results/02212019SOC_dressed_state_8TF13/phi_1_12ms_';
-%savepath = 'simulation_results/02072019SOC_dressed_state_8TF/phi_1_50ms_';
+wavepath = 'simulation_results/05012019SOC_dressed_state_8TF13/phi_1_50ms_';
+savepath = 'simulation_results/02072019SOC_dressed_state_8TF/phi_1_50ms_';
 
 
 % mom_evo = zeros(18,10,2,200);
