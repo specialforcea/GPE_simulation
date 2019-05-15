@@ -23,6 +23,7 @@ fftphi = phi(:,1:fftNx);
 fftX = X(1:fftNx);
 fftL = L - deltax;
 fftf = f(1:fftNx);
+[eigens, MatB, MatV] = compute_omega_matrix(Omega,k_R,fftX,fftNx);
 if size(speckle,2)~=1
     speckle = speckle(1:fftNx); 
 end
@@ -35,7 +36,7 @@ draw = 1;
 m=1;
 while (t < Stop_time)
     
-    fftphi = time_evolve(fftphi, potential,speckle,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0,c2,Omega,k_R,detuning);
+    fftphi = time_evolve(fftphi, potential,speckle,Deltat,fftX,fftNx,deltax,deltaf,fftL,c0,c2,eigens,MatB,MatV,detuning);
     t = t - 1i*Deltat;
     n = n + 1;
 
