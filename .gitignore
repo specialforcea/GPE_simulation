@@ -9,3 +9,5 @@ speckle analysis and simulation 1D spinor/speckle bench test data/numerical_spec
 *.png
 
 *.mat
+*.sbatch
+*.sbatch

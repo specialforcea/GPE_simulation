@@ -16,19 +16,19 @@ dtn = 4.*(ks - k_minima);
 
 % ks = [0.2,0.4,0.6,0.8];
 % dts = (2+ks).^2 - ks.^2 - 4;
-savepath = 'simulation_results/05012019SOC_dressed_state_8TF13/phi_1_450ms_';
+savepath = 'simulation_results/05012019SOC_dressed_state_8TF13/phi_1_900ms_';
 
-Omega = linspace(0,OmegaR*detuning,28801);
+Omega = linspace(0,OmegaR*detuning,57601);
 
 draw = 0;
 % spin1_2 = zeros(4,320);
 % spin2_2 = zeros(4,320);
 % width_2 = zeros(4,320);
 % pos_2 = zeros(4,320);
-for j=1:3
+for j=1:4
 phi = phi_0;
-'6_1 alive'
-for i=1:28800
+'alive'
+for i=1:57600
     phi_1 = dynamic(phi,0.001,1e-5,c0,c2,Nx,0,1,0,k_scale,f,deltax,deltaf,L,Omega(i+1),xmin,xmax,k_R,dtn(j)*detuning);
    % phi_1 = dynamic(phi,0.001,1e-5,c0,c2,Nx,0,1,0,k_scale,f,deltax,deltaf,L,4*detuning,xmin,xmax,k_R,detuning);
 
@@ -64,3 +64,5 @@ end
 save(strcat(savepath,num2str(ks(j)),'k_R_',num2str(OmegaR),'E_spin1.mat'),'spin1');
 save(strcat(savepath,num2str(ks(j)),'k_R_',num2str(OmegaR),'E_fphi.mat'),'phi');
 end
+'start kick evolve'
+kick_evolve_with_soc_cluster6_1;
