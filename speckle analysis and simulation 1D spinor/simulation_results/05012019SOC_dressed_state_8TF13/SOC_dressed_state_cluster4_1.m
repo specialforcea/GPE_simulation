@@ -45,14 +45,14 @@ save(strcat(savepath,num2str(ks(j)),'k_R_',num2str(OmegaR),'E.mat'),'phi_1');
 kick = ks(j) - k_minima(j);
 phi = phi_1.*[exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X);exp(1i.*kick.*k_R.*X)];
 spin1 = zeros(1,320);
-draw = 0;
+draw = 1;
     
 for i=1:320
     phi_dress = dynamic(phi,0.005,1e-5,c0,c2,Nx,0,0,0,k_scale,f,deltax,deltaf,L,OmegaR*detuning,xmin,xmax,k_R,0);
     phi = phi_dress;
     spin1(i) = integr(sq(phi(1,:)),Nx,deltax);
 
-    if draw==1 && mod(i,20)==0
+    if draw==1 && mod(i,5)==0
         plot(1:1:320,spin1)
         drawnow;
     end

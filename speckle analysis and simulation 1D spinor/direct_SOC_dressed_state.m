@@ -24,7 +24,6 @@ phi_1(2,:) = phi_0(1,:).*coef2.*exp(1i.*(kick+2).*k_R.*X);
 
 save(strcat(savepath,num2str(ks(j)),'k_R_',num2str(OmegaR),'E.mat'),'phi_1');
 
-
 phi = phi_1;
 spin1 = zeros(1,320);
 draw = 0;
