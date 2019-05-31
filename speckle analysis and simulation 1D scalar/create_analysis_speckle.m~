@@ -1,8 +1,8 @@
-create = 1;
-analysis = 1;
+create = 0;
+analysis = 0;
 
 if create==1
-    for j=12:12
+    for j=4:13
 %         X_cord = repmat((1:1:Nx),Nx,1);
 %         Y_cord = repmat((1:1:Nx)',1,Nx);
 % 
@@ -17,7 +17,7 @@ if create==1
 % 
 %         %aperture = r_cord<(2^j);
         field = exp(-2*pi*1i*rand(2^j));
-        field = field(250:3850,250:3850);
+        field = field(100:4000,100:4000);
         inten = sq(fftshift(fft2(field,Nx,Nx)));
 
         save(strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(j),'.mat'), 'inten')
@@ -37,7 +37,7 @@ if analysis==1
     corr_r = zeros(30,N_grid);
     cors = zeros(1,30);
 
-    for i=12:12
+    for i=9:9
         filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
         speckle = load(filepath);
         speckle = speckle.inten;
@@ -95,8 +95,8 @@ if analysis==1
         plot(f,kr(20:end),pow_r(i,20:end)./max(pow_r(i,20:end)))
         title('fit linear PSD to data')
         xlabel('k/k_R in radial direction')
-        ylabel('normalized power density')
-        text(3,0.3,strcat('k_m_a_x = ',num2str(coe(2))))
+        ylabel('power density')
+        text(3,2e21,strcat('k_m_a_x = ',num2str(coe(2))))
 
 
     %fit correlation length
