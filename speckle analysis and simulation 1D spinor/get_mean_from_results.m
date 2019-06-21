@@ -1,19 +1,19 @@
-folders = ["05" "1" "15" "2" "25" "3" "35" "4" "45" "5" "55" "6" "65" "7" "75" "10" "11" "12"];
-omegas = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,10,11,12];
+folders = ["05" "1" "15" "2" "25" "3" "4" "45" "5" "55" "6" "65" "7" "75" "8"];
+omegas = [0.5,1,1.5,2,2.5,3,4,4.5,5,5.5,6,6.5,7,7.5,8];
 
-savepath = 'simulation_results/05162019kick_evolve_with_soc_cluster/';
-mp = zeros(18,21,320);
-mm = zeros(18,21,320);
-gv = zeros(18,21,320);
-for i=1:18
+savepath = 'simulation_results/05292019kick_evolve_with_soc_cluster/';
+mp = zeros(15,21,200);
+mm = zeros(15,21,200);
+gv = zeros(15,21,200);
+for i=1:15
     result_path = strcat(savepath,num2str(folders(i)));
     load(strcat(result_path,'\mean_p.mat'));
     load(strcat(result_path,'\spin1.mat'));
-    mean_p_ = reshape(mean_p(:,:,1,:),[21,20,320]).*spin1 + reshape(mean_p(:,:,2,:),[21,20,320]).*(1-spin1);
-    mp(i,:,:) = reshape(mean(mean_p_,2),[1,21,320]);
+    mean_p_ = reshape(mean_p(:,:,1,:),[21,20,200]).*spin1 + reshape(mean_p(:,:,2,:),[21,20,200]).*(1-spin1);
+    mp(i,:,:) = reshape(mean(mean_p_,2),[1,21,200]);
 end
-gv = (mp(:,:,2:320)-mp(:,:,1:319))/(0.005*Dip_freq);
-gv_ratio = reshape(gv(:,:,130)./gv(:,:,1),[18,21]);
+gv = (mp(:,:,2:200)-mp(:,:,1:199))/(0.005*Dip_freq);
+gv_ratio = reshape(gv(:,:,199)./gv(:,:,1),[15,21]);
 
 % for i=1:18
 %     result_path = strcat(savepath,folders(i));

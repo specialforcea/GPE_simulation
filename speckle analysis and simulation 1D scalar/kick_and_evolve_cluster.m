@@ -1,4 +1,4 @@
-%elolve for 48ms
+
 scale_parameters;
 Groundstate;
 
