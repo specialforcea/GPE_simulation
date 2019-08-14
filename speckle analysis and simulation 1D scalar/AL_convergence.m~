@@ -1,0 +1,24 @@
+rho = @(x)(( acos(min(1,x./3))- x./3.*sqrt(1-(min(1,x./3)).^2))*2/pi);
+N = 101;
+k = linspace(-2,2,N);
+T = zeros(N,N);
+E_window = 0.1;
+for i = 1:N
+    for j=1:N
+        if abs(i-j)<2
+            T(i,j) = 1;
+        else
+            0;
+        end
+    end
+end
+
+norm = repmat(sum(T,1),N,1);
+T = T./norm;
+[V,D] = eig(T);
+diff = 1;
+while diff>0.00001
+    T1 = T*T;
+    diff = max(max(abs(T1-T)));
+    T = T1;
+end
