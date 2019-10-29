@@ -2,7 +2,7 @@
 scale_parameters;
 Groundstate;
 
-i=8;
+i=7;
 filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
 speckle = load(filepath);
 speckle = speckle.inten;
