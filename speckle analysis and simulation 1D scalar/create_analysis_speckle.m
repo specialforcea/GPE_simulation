@@ -17,7 +17,8 @@ if create==1
 % 
 %         %aperture = r_cord<(2^j);
         field = exp(-2*pi*1i*rand(2^j));
-        field = field(250:3850,250:3850);
+        
+        %field = field(250:3850,250:3850);
         inten = sq(fftshift(fft2(field,Nx,Nx)));
 
         save(strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(j),'.mat'), 'inten')
@@ -27,7 +28,7 @@ if create==1
 end
 
 if analysis==1
-    N_x = 5000;
+    N_x = 4800;
     interval = (1:30:N_x);
     kr = interval*deltaf/k_R*2*pi;
     N_grid = size(kr,2);

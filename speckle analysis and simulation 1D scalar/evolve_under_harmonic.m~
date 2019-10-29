@@ -1,0 +1,20 @@
+mk = 1;
+phi_mk = phi_0;
+phi_mk(1,:) = phi_mk(1,:).*exp(1i*k_R*kicks(mk)*X);
+
+
+phi = phi_mk;
+
+for i=1:320
+    phi_1 = dynamic(phi,0.005,1e-5,c0,c2,Nx,0,1,0,k_scale,f,deltax,deltaf,L,Omega,xmin,xmax);
+
+    fp = sq(fourier_transform(phi_1(1,:),Nx,deltax));
+    
+    plot(f./k_R*2*pi,fp);
+    drawnow;
+
+    phi = phi_1;
+
+end
+
+
