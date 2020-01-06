@@ -1,32 +1,38 @@
-create = 1;
+create = 0;
 analysis = 1;
 
+% Nx = 2^12+1;
+% deltax = (0.025)/(Nx-1);
+% deltaf = 1/Nx/deltax;
+% k_R = 2*pi/532e-9*12.5/sqrt(12.5^2+30^2);
+
+
 if create==1
-    for j=12:12
-        Nx = 2^j + 1;
+    for j=9:9
+        N_x = 2^j + 1;
         X = (-2^(j-1):1:2^(j-1));
         X = repmat(X,2^j+1,1);
         Y = (-2^(j-1):1:2^(j-1))';
         Y = repmat(Y,1,2^j+1);
-        beam = exp(-(X.^2 + Y.^2 )/2/2^(2*j-6));
+        beam = exp(-(X.^2 + Y.^2 )/2/71.7);
 
         rand_field = exp(-2*pi*1i*rand(2^j+1));
-        iris = sqrt(X.^2 + Y.^2)<2^(j-3);
+        iris = sqrt(X.^2 + Y.^2)<153.6;
         
         
         %field = field(250:3850,250:3850);
         field = beam.*rand_field.*iris;
         inten = sq(fftshift(fft2(field,Nx,Nx)));
 
-        save(strcat('speckle bench test data/numerical_speckle/13/gauss_speckle_', num2str(j),'.mat'), 'inten')
+        save(strcat('speckle bench test data/numerical_speckle/13/gauss_speckle_14mmbeam_15mmiris','.mat'), 'inten')
 
 
     end
 end
 
 if analysis==1
-    N_x = 2500;
-    interval = (1:30:N_x);
+    N_x = 150;
+    interval = (1:1:N_x);
     kr = interval*deltaf/k_R*2*pi;
     N_grid = size(kr,2);
     pow_r = zeros(10,N_grid);
@@ -36,7 +42,7 @@ if analysis==1
     cors = zeros(1,30);
 
     for i=12:12
-        filepath = strcat('speckle bench test data/numerical_speckle/13/gauss_speckle_', num2str(i),'.mat');
+        filepath = strcat('speckle bench test data/numerical_speckle/13/gauss_speckle_14mmbeam_6mmiris','.mat');
         speckle = load(filepath);
         speckle = speckle.inten;
         speckle = double(speckle);
@@ -88,9 +94,10 @@ if analysis==1
 
     %fit linear PSD to data
         figure(i)
-        f = fit(kr(20:end)',pow_r(i,20:end)'./max(pow_r(i,20:end)),'a*(acos(min(x/b,1)) - min(x/b,1)*sqrt(1-(min(x/b,1))^2))','StartPoint',[1/1.6,4]);
+        disp = 10;
+        f = fit(kr(disp:end)',pow_r(i,disp:end)'./max(pow_r(i,disp:end)),'a*(acos(min(x/b,1)) - min(x/b,1)*sqrt(1-(min(x/b,1))^2))','StartPoint',[1/1.6,1]);
         coe = coeffvalues(f);
-        plot(f,kr(20:end),pow_r(i,20:end)./max(pow_r(i,20:end)))
+        plot(f,kr(disp:end),pow_r(i,disp:end)./max(pow_r(i,disp:end)))
         title('fit linear PSD to data')
         xlabel('k/k_R in radial direction')
         ylabel('normalized power density')

@@ -1,5 +1,5 @@
 ks = (1.2:0.01:3.5);
-OmegaR = 0.5;
+OmegaR = 4.0;
 band = (-3.5:0.001:3.5);
 
 Deltaq = @(x)(4.*x);
@@ -41,25 +41,30 @@ for i=1:size(ks,2)
     
     
     for j=1:size(band,2)
-        eng_dif = E_down(band(j))-E_down(ks(i));
-        if eng_dif ==0
-            fac = 1;
-        else
-            fac = sin(eng_dif*1)^2/eng_dif^2;
+        if abs(band(j)-ks(i))>0.001
+            eng_dif = E_down(band(j))-E_down(ks(i));
+            if eng_dif ==0
+                fac = 1;
+            else
+                fac = sin(eng_dif*50)^2/eng_dif^2;
+            end
+            scatter_rate_to_down(i) = scatter_rate_to_down(i) + fac*(a(band(j))*a(ks(i))+ b(band(j))*b(ks(i)))^2*rho(abs(band(j)-ks(i)));
         end
-        scatter_rate_to_down(i) = scatter_rate_to_down(i) + fac*(a(band(j))*a(ks(i))+ b(band(j))*b(ks(i)))^2*rho(abs(band(j)-ks(i)));
     end
     
    
     
     for j=1:size(band,2)
-        eng_dif = E_up(band(j))-E_down(ks(i));
-        if eng_dif ==0
-            fac = 1;
-        else
-            fac = sin(eng_dif*1)^2/eng_dif^2;
+        
+        if abs(band(j)-ks(i))>0.001
+            eng_dif = E_up(band(j))-E_down(ks(i));
+            if eng_dif ==0
+                fac = 1;
+            else
+                fac = sin(eng_dif*50)^2/eng_dif^2;
+            end
+            scatter_rate_to_up(i) = scatter_rate_to_up(i) + fac*(c(band(j))*a(ks(i))+ d(band(j))*b(ks(i)))^2*rho(abs(band(j)-ks(i)));
         end
-        scatter_rate_to_up(i) = scatter_rate_to_up(i) + fac*(c(band(j))*a(ks(i))+ d(band(j))*b(ks(i)))^2*rho(abs(band(j)-ks(i)));
     end
     
 end
@@ -67,13 +72,13 @@ end
 scatter_rate = scatter_rate_to_down + scatter_rate_to_up;
 scatter_rate = scatter_rate./max(scatter_rate);
 % figure(2)
-subplot(321)
+subplot(325)
 scatter(E_down(ks),scatter_rate)
 hold on
 plot(E_down(ks),scatter_rate)
 ylabel('normalized scatter rate')
 xlabel('E_0/E_R')
-subplot(322)
+subplot(326)
 plot(band,E_up(band),band,E_down(band))
 text(0,5,strcat('Omega=',num2str(OmegaR),'E_R'))
 ylabel('E/E_R')

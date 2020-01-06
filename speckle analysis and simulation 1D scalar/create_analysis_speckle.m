@@ -28,7 +28,7 @@ if create==1
 end
 
 if analysis==1
-    N_x = 4800;
+    N_x = 3000;
     interval = (1:30:N_x);
     kr = interval*deltaf/k_R*2*pi;
     N_grid = size(kr,2);
@@ -38,7 +38,7 @@ if analysis==1
     corr_r = zeros(30,N_grid);
     cors = zeros(1,30);
 
-    for i=6:6
+    for i=12:12
         filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
         speckle = load(filepath);
         speckle = speckle.inten;

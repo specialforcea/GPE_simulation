@@ -1,14 +1,14 @@
 li=[0,1,1.5,2,2.5,3,3.5,4];
 
-N_x = 80;
-kr = (1:1:N_x)*deltasf/k_R*4*pi;
+N_x = 100;
+kr = (1:1:N_x)*deltasf/k_R*2*pi;
 pow_r = zeros(3,N_x);
 
 rr = (1:1:N_x)*4.8e-6/46;
 corr_r = zeros(3,N_x);
 cors = zeros(1,8);
 
-for i=6:6
+for i=1:1
     speckle = imread(strcat('speckle bench test data/13/',num2str(li(i)),'.png'));
     speckle = double(speckle);
     speckle = speckle(10:10+Ns,10:10+Ns);
@@ -61,13 +61,13 @@ for i=6:6
 
 %fit linear PSD to data
     figure(i)
-    f = fit(kr(7:end)',pow_r(i,7:end)'./max(pow_r(i,7:end)),'a*(acos(min(x/b,1)) - min(x/b,1)*sqrt(1-(min(x/b,1))^2))','StartPoint',[1/1.3,4]);
+    f = fit(kr(7:end)',pow_r(i,7:end)'./max(pow_r(i,7:end)),'a*(acos(min(x/b,1)) - min(x/b,1)*sqrt(1-(min(x/b,1))^2))','StartPoint',[1/1.3,1]);
     coe = coeffvalues(f);
     plot(f,kr(7:end),pow_r(i,7:end)./max(pow_r(i,7:end)))
     title('fit linear PSD to data')
     xlabel('k/k_R in radial direction')
     ylabel('normalized psd')
-    text(3.5,0.5,strcat('k_m_a_x = ',num2str(coe(2))))
+    text(0.8,0.5,strcat('k_m_a_x = ',num2str(coe(2))))
 
 
 %fit correlation length
