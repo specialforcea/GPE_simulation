@@ -1,7 +1,7 @@
 folders = ["05" "1" "15" "2" "25" "3" "35" "4" "45" "5" "55" "6" "65" "7" "75" "8"];
 omegas = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8];
 
-savepath = 'simulation_results/05292019kick_evolve_with_soc_cluster_non/';
+savepath = 'simulation_results/05292019kick_evolve_with_soc_cluster/';
 mp = zeros(16,21,200);
 mm = zeros(16,21,200);
 gv = zeros(16,21,200);
@@ -36,6 +36,13 @@ for i=1:16
     mm(i,:,:) = reshape(mean(mean_m_,2),[1,21,200])./k_R*2*pi;
     
 end
-
+ks = (1.2:0.1:3.2);
 gv_ratio = reshape(mm(:,:,200)./mm(:,:,1),[16,21]);
+k_minima = sqrt(1-min(4.0,omegas).^2./16);
 
+figure(1)
+for i=1:16
+    %plot(ks-k_minima(i), gv_ratio(i,:))
+    plot(mm(i,:,1),gv_ratio(i,:))
+    hold on
+end
