@@ -1,19 +1,51 @@
-li=[0,1,1.5,2,2.5,3,3.5,4];
+create = 1;
+analysis = 1;
 
-N_x = 150;
-kr = (1:1:N_x)*deltasf/k_R*2*pi;
+if create==1
+    %j = 6;
+            N0 = 2000;
+            N1 = 8001;
+        
+        field = exp(-2*pi*1i*rand(N0));%.*aperture;
+
+deltas0 = 25e-3/N1/a_0;
+
+smin0 = -(N1-1)/2*deltas0;
+smax0 = (N1-1)/2*deltas0;
+
+
+deltasf0 = 1/N1/deltas0;
+
+        
+        %field = field(250:3850,250:3850);
+        inten = sq(fftshift(fft2(field,N1,N1)));
+
+        %save(strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(j),'.mat'), 'inten')
+        %save(strcat('speckle bench test data/numerical_speckle/13/inten_Ns', num2str(j),'.mat'), 'inten')
+
+
+    
+end
+
+if analysis==1
+    N_x = 200;
+    
+kr = (1:1:N_x)*deltasf0/k_R*2*pi;
 pow_r = zeros(3,N_x);
 
-rr = (1:1:N_x)*4.8e-6/46;
+rr = (1:1:N_x)*deltas0*a_0;
 corr_r = zeros(3,N_x);
 cors = zeros(1,8);
 
-for i=1:1
-    speckle = imread(strcat('speckle bench test data/13/',num2str(li(i)),'.png'));
-    speckle = imread('lab speckle.png');
+%i = j;
+    i = 1;
+    %filepath = strcat('speckle bench test data/numerical_speckle/13/inten_Ns', num2str(i),'.mat');
+    %speckle = load(filepath);
+    %speckle = speckle.inten;
+    speckle = inten;
     speckle = double(speckle);
-    speckle = speckle(10:10+Ns,10:10+Ns);
     speckle = speckle - mean(mean(speckle));
+    speckle = double(speckle);
     
     %fsp = fourier_transform(speckle',Ns,deltas)';
     fsp = fftshift(fft2(speckle));
@@ -24,8 +56,8 @@ for i=1:1
     
     
     
-    X_cord = repmat((1:1:Ns),Ns,1);
-    Y_cord = repmat((1:1:Ns)',1,Ns);
+    X_cord = repmat((1:1:N1),N1,1);
+    Y_cord = repmat((1:1:N1)',1,N1);
     
     X_cord = X_cord - mean(maxc);
     Y_cord = Y_cord - mean(maxr);
@@ -84,6 +116,5 @@ for i=1:1
 % text(0.4e-5,0.6,strcat('fit a*exp(-x^2/2/b^2), b = ',num2str(coe(2))))
 % cors(i) = coe(2);
 end
-    
-    
-    
+
+

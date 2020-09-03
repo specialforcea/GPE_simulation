@@ -28,7 +28,7 @@ xmax = 8*TF_radius;
 
 L = xmax-xmin;
 Nx = 2^13+1; %number of grids.
-Ns = 1280;
+Ns = 1000;%1280;
 
 speckle_mag = 46;
 deltas = 4.8e-6/speckle_mag/a_0;

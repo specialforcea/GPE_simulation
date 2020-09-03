@@ -1,7 +1,7 @@
 folders = ["05" "1" "15" "2" "25" "3" "35" "4" "45" "5" "55" "6" "65" "7" "75" "8"];
 omegas = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8];
 
-savepath = 'simulation_results/05292019kick_evolve_with_soc_cluster_non/';
+savepath = 'simulation_results/05292019kick_evolve_with_soc_cluster/';
 mp = zeros(16,21,200);
 mm = zeros(16,21,200);
 gv = zeros(16,21,200);
@@ -29,8 +29,8 @@ gv = zeros(16,21,200);
 
 for i=1:16
     result_path = strcat(savepath,folders(i));
-    load(strcat(result_path,'\mean_m.mat'));
-    load(strcat(result_path,'\spin1.mat'));
+    load(strcat(result_path,'/mean_m.mat'));
+    load(strcat(result_path,'/spin1.mat'));
     %mean_m_ = reshape(mean_m(:,:,1,:),[21,20,320]).*spin1 + reshape(mean_m(:,:,2,:),[21,20,320]).*(1-spin1);
     mean_m_ = reshape(mean_m(:,:,1,:),[21,20,200]).*spin1 + reshape(mean_m(:,:,2,:),[21,20,200]).*(1-spin1);
     mm(i,:,:) = reshape(mean(mean_m_,2),[1,21,200])./k_R*2*pi;
