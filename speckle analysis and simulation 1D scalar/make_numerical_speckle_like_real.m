@@ -1,6 +1,8 @@
 create = 1;
 analysis = 1;
 
+k_R = 2*pi/532e-9*a_0*12.5/sqrt(12.5^2+30^2);
+
 if create==1
     %j = 6;
         N0 = Ns;
@@ -9,7 +11,7 @@ if create==1
         ds_ = 4.8e-6/speckle_mag;
         full_frame = lambda*focal/ds_;
         ds = full_frame/N0;
-        aperture_radius = 12.5e-3*0.8;
+        aperture_radius = 10e-3;
         beam_e2_radius = 12.5e-3;
         
         

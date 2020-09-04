@@ -25,7 +25,7 @@ fftphi = phi(:,1:fftNx);
 fftX = X(1:fftNx);
 fftL = L - deltax;
 fftf = f(1:fftNx);
-if speckle~=0
+if size(speckle,2)~=1
     speckle = speckle(1:fftNx); 
 end
 %fftphi = phi;

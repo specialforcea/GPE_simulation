@@ -38,7 +38,7 @@ if analysis==1
     corr_r = zeros(30,N_grid);
     cors = zeros(1,30);
 
-    for i=12:12
+    for i=5:5
         filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
         speckle = load(filepath);
         speckle = speckle.inten;
