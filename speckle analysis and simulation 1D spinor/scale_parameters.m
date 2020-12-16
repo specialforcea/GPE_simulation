@@ -18,7 +18,7 @@ quanta = hbar*Dip_freq;
 k_scale = k*a_0;%dimensionless k in the probelm
 Raman_beams_angle = 180;%deg
 k_R = k_scale*sin(Raman_beams_angle/2/180*pi);
-
+%k_R = 2*pi/532e-9*a_0*12.5/sqrt(12.5^2+30^2);
 E_r = (hbar)^2*(k_R/a_0)^2/(2*Rb_Mass);%recoil energy
 order = 3;%number of diffracted orders considered.
 %Beta = 3000; dimensionless interaction.

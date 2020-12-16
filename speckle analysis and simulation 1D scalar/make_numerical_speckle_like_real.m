@@ -11,7 +11,7 @@ if create==1
         ds_ = 4.8e-6/speckle_mag;
         full_frame = lambda*focal/ds_;
         ds = full_frame/N0;
-        aperture_radius = 10e-3;
+        aperture_radius = 4e-3;
         beam_e2_radius = 12.5e-3;
         
         

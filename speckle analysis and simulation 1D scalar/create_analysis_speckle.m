@@ -38,7 +38,7 @@ if analysis==1
     corr_r = zeros(30,N_grid);
     cors = zeros(1,30);
 
-    for i=5:5
+    for i=12:12
         filepath = strcat('speckle bench test data/numerical_speckle/13/inten_', num2str(i),'.mat');
         speckle = load(filepath);
         speckle = speckle.inten;
@@ -90,13 +90,13 @@ if analysis==1
 
 
     %fit linear PSD to data
-        figure(i)
-        f = fit(kr(1:end)',pow_r(i,1:end)'./max(pow_r(i,1:end)),'a*(acos(min(x/b,1)) - min(x/b,1)*sqrt(1-(min(x/b,1))^2))','StartPoint',[1/1.6,4]);
-        coe = coeffvalues(f);
-        plot(f,kr(1:end),pow_r(i,1:end)./max(pow_r(i,1:end)))
-        title('fit linear PSD to data')
+        %figure(i)
+        fit_ = fit(kr(1:end)',pow_r(i,1:end)'./max(pow_r(i,1:end)),'a*(acos(min(x/b,1)) - min(x/b,1)*sqrt(1-(min(x/b,1))^2))','StartPoint',[1/1.6,4]);
+        coe = coeffvalues(fit_);
+        plot(fit_,kr(1:end),pow_r(i,1:end)./max(pow_r(i,1:end)))
+        title('fit PSD to data')
         xlabel('k/k_R in radial direction')
-        ylabel('normalized power density')
+        ylabel('normalized PSD')
         text(3,0.3,strcat('k_m_a_x = ',num2str(coe(2))))
 
 

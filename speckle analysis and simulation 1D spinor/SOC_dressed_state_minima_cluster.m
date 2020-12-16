@@ -2,7 +2,6 @@
 %state.
 scale_parameters;
 Groundstate;
-ks = (1.2:0.1:3.2);
 OmegaR = 4.0;
 band = (-4:0.001:4);
 Deltaq = 4.*band;
